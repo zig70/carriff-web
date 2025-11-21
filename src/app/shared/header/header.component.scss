@@ -1,0 +1,117 @@
+@import 'variables';
+/* Base styles for the dark header */
+.main-header {
+  background-color: $color-black-bg;
+  color: $color-text-light;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: $color-text-light;
+  font-weight: bold; /* Carriff Digital brand name */
+}
+
+.logo {
+  height: 30px; 
+  width: auto; /* Ensures width scales proportionally */
+  max-width: 100px; /* Add a safety limit */
+  margin-right: 10px;
+}
+
+/* Hide desktop navigation by default (mobile first) */
+.desktop-nav {
+  display: none;
+}
+
+/* --- Mobile Menu Styles (The open/close component) --- */
+.mobile-menu-toggle {
+  background: none;
+  border: none;
+  color: $color-text-light;
+  font-size: 24px;
+  cursor: pointer;
+  /* Show hamburger on mobile */
+  display: block; 
+}
+
+.mobile-dropdown {
+  /* Initially hidden off-screen */
+  display: none;
+  position: absolute; /* Place it below the header */
+  width: 100%;
+  background-color: $color-secondary; /* Light blue background as in design */
+  z-index: 10; 
+}
+
+.mobile-dropdown.open {
+  display: block; /* Show when 'open' class is applied */
+}
+
+.mobile-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-dropdown li a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #000;
+  border-bottom: 1px solid $color-secondary; /* Light separator line */
+}
+
+/* Contact button in mobile menu */
+.mobile-contact-btn {
+  background-color: $color-primary; /* Magenta/Purple color as in design */
+  color: $color-text-light!important;
+  font-weight: bold;
+}
+
+@media (min-width: $breakpoint-tablet) {
+  /* Hide the mobile hamburger button */
+  .mobile-menu-toggle {
+    display: none;
+  }
+
+  /* Hide the mobile dropdown */
+  .mobile-dropdown {
+    display: none !important;
+  }
+
+  /* Show the desktop navigation */
+  .desktop-nav {
+    display: block;
+  }
+
+  .desktop-nav ul {
+    list-style: none;
+    display: flex; /* Arrange links horizontally */
+    padding: 0;
+    margin: 0;
+  }
+
+  .desktop-nav li a {
+    text-decoration: none;
+    color: $color-text-light;
+    padding: 10px 15px;
+    margin: 0 5px;
+  }
+
+  /* Styling for the desktop Contact button */
+  .contact-btn {
+    background-color: $color-primary; /* Magenta/Purple button */
+    padding: 10px 20px !important;
+    border-radius: 5px; /* Optional: smooth corners */
+    font-weight: bold;
+  }
+}

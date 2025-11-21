@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'variables';
+/* src/styles.scss */
+
+// Resetting default browser styles is crucial
+* {
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+html, body {
+  margin: 0;         /* Removes default browser margin (fixes white space at edges) */
+  padding: 0;
+  width: 100%;
+  height: 100%;      /* Ensures body takes full viewport height */
+  overflow-x: hidden; /* Prevents horizontal scrollbar if elements slightly overflow */
+  background-color: #0d0d18; /* Set the background to match your hero/about section */
+}
+
+#root, app-root {
+  /* This ensures the Angular root container also takes full height for proper layout */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* Allows content to push the footer down */
+}
+
+main {
+  /* This section takes up all remaining vertical space, pushing the footer to the very bottom */
+  flex-grow: 1; 
+}

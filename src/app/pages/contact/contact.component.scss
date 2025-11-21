@@ -1,0 +1,120 @@
+/* src/app/contact/contact.component.scss */
+
+// Using global variables: $color-text-dark, $color-text-light, $color-primary, $breakpoint-tablet
+@import 'variables';
+
+.contact-section {
+  padding: 40px 20px;
+  background-color: $color-text-light; // White background for the whole section
+  min-height: calc(100vh - 160px); // Ensures component fills remaining vertical space
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-card-wrapper {
+  display: flex;
+  flex-direction: column; // Default stacking on mobile
+  width: 100%;
+  max-width: 1000px; // Max width for the entire card
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Left Panel (Image) --- */
+.contact-image-panel {
+  position: relative;
+  height: 300px; // Default height for mobile/stacked view
+  flex-shrink: 0;
+  
+  .contact-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Ensures the image covers the area without distortion
+    filter: brightness(0.9); // Slight darkening if needed
+  }
+  
+  .cta-overlay-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cta-title {
+    font-size: 4em;
+    color: $color-text-light;
+    font-weight: bold;
+    margin: 0;
+  }
+}
+
+/* --- Right Panel (Details) --- */
+.contact-details-panel {
+  background-color: $color-text-light; 
+  color: $color-text-dark;
+  padding: 30px;
+  display: flex;
+  align-items: center; 
+}
+
+.details-content {
+  width: 100%;
+}
+
+.detail-label {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+.detail-value {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.1em;
+}
+
+.email {
+  color: $color-primary; // Highlight the email address with your primary color
+  font-weight: bold;
+}
+
+.detail-motto {
+  font-style: italic;
+  margin: 30px 0;
+  font-size: 1.1em;
+  border-left: 3px solid $color-primary; // Small visual accent
+  padding-left: 10px;
+}
+
+.social-label {
+  font-weight: bold;
+}
+
+.detail-value a {
+  color: $color-text-dark;
+  text-decoration: none;
+  &:hover {
+    color: $color-primary;
+    text-decoration: underline;
+  }
+}
+
+/* --- Desktop and Tablet Layout --- */
+@media (min-width: $breakpoint-tablet) {
+  .contact-card-wrapper {
+    flex-direction: row; // Two columns side-by-side
+    min-height: 500px; // Set a fixed height for the two-column layout
+  }
+
+  .contact-image-panel,
+  .contact-details-panel {
+    width: 50%; // Each panel takes half the width
+    height: 500px; // Match the wrapper height
+  }
+}

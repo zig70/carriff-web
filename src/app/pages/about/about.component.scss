@@ -1,0 +1,139 @@
+/* src/app/about/about.component.scss */
+
+// Import global variables (if not already imported globally in styles.scss)
+@import 'variables';
+
+.about-section {
+  padding: 40px 20px;
+  background-color: #1a1a2e; // A dark background, similar to your hero section
+  min-height: calc(100vh - ($height-header-mobile + $height-footer-mobile)); // Adjust as needed
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; // Align to top for longer content
+}
+
+.about-card-desktop-wrapper {
+  display: flex;
+  flex-direction: column; // Stack image and content vertically on mobile
+  max-width: 1000px; // Max width for the entire card on desktop
+  width: 100%;
+  background-color: $color-black-bg; // Dark background for the card
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  overflow: hidden; // Ensures rounded corners clip content
+}
+
+.about-card-image {
+  flex-shrink: 0; // Prevent image from shrinking
+  text-align: center;
+  position: relative; // For the mobile info block
+}
+
+.about-card-image img {
+  width: 100%; // Make image fill its container on mobile
+  height: auto;
+  display: block; // Remove extra space below image
+  max-width: 500px; // Limit max width for the image itself
+  margin: 0 auto; // Center the image
+}
+
+.about-card-info-mobile {
+  background-color: $color-secondary; // Light blue background
+  color: $color-text-dark;
+  padding: 20px;
+  text-align: left;
+  
+  .person-name {
+    font-size: 1.8em;
+    margin: 0;
+  }
+  .person-title {
+    font-size: 1.1em;
+    margin: 5px 0 0;
+  }
+}
+
+.about-card-content {
+  padding: 30px;
+  color: $color-text-light; // Light text color for readability
+  text-align: left;
+}
+
+.person-name-desktop {
+  display: none; // Hidden by default on mobile, shown on desktop
+  font-size: 2.2em;
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: $color-text-light;
+}
+
+.person-subtitle {
+  font-size: 1.5em;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: lighten($color-primary, 20%); // A lighter shade of magenta for subtitle
+}
+
+.person-description {
+  font-size: 1.1em;
+  line-height: 1.6;
+  max-width: 700px; // Limit line length for readability
+  margin: 0 auto;
+}
+
+/* --- Desktop Styles --- */
+@media (min-width: $breakpoint-tablet) {
+  .about-card-desktop-wrapper {
+    flex-direction: row; // Arrange image and content side-by-side
+    // background-color: $color-header-bg; // Ensure full card has dark background
+    // Remove individual background for content if card has one.
+    // The design has a darker black for the text background
+    background-color: #0d0d18; 
+  }
+
+  .about-card-image {
+    width: 40%; // Image takes 40% of the width
+    max-width: 400px; // Limit the max width of the image section
+    position: relative;
+    // Add the light blue block below the image directly in the image container
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px; // Adjust height as per design
+      background-color: $color-secondary; // Light blue block
+      z-index: 1; // Keep it behind text if text overlays
+    }
+  }
+
+  .about-card-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    z-index: 2; // Keep image above the pseudo-element
+    position: relative; // Needed for z-index to work
+  }
+  
+  // Hide the mobile info block on desktop
+  .about-card-info-mobile {
+    display: none; 
+  }
+
+  .about-card-content {
+    width: 60%; // Content takes 60% of the width
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .person-name-desktop {
+    display: block; // Show desktop name
+  }
+
+  .person-subtitle {
+    margin-top: 5px;
+  }
+}

@@ -1,1 +1,30 @@
-<p>header works!</p>
+<header class="main-header">
+  <div class="header-content">
+    <a routerLink="/" class="logo-link">
+      <img src="assets/goat-logo.png" alt="Carriff Digital Logo" class="logo">
+      <span class="brand-name">Carriff Digital</span>
+    </a>
+
+    <nav class="desktop-nav">
+      <ul>
+        <li><a routerLink="/services">Services</a></li>
+        <li><a routerLink="/blog">Blog</a></li>
+        <li><a routerLink="/about">About</a></li>
+        <li><a routerLink="/contact" class="contact-btn">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+      &#9776; 
+    </button>
+  </div>
+
+  <nav class="mobile-dropdown" [class.open]="isMobileMenuOpen">
+    <ul>
+      <li><a routerLink="/services" (click)="closeMobileMenu()">Services</a></li>
+      <li><a routerLink="/blog" (click)="closeMobileMenu()">Blog</a></li>
+      <li><a routerLink="/about" (click)="closeMobileMenu()">About</a></li>
+      <li><a routerLink="/contact" class="mobile-contact-btn" (click)="closeMobileMenu()">Contact</a></li>
+    </ul>
+  </nav>
+</header>

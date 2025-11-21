@@ -1,0 +1,73 @@
+/* src/app/home/home.component.scss */
+@import 'variables';
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  // Uses new variable for minimum height
+  min-height: calc(100vh - $height-header - $height-footer);
+  display: flex;
+  align-items: center; 
+  justify-content: flex-start; 
+  padding: 20px; 
+
+  background-image: url('/assets/AutomationSimple1.png');
+  background-size: cover; 
+  background-position: center center; 
+  background-repeat: no-repeat;
+}
+
+.hero-content {
+  max-width: 600px;
+  // Uses global light text color
+  color: $color-text-light; 
+  text-align: left;
+  padding-left: 5%; 
+}
+
+.hero-title {
+  // Uses new variable for hero title font size
+  font-size: $font-size-hero-title; 
+  line-height: 1.1; 
+  margin-bottom: 20px;
+  font-weight: bold; 
+  letter-spacing: -0.02em; 
+}
+
+.hero-cta-button {
+  // Uses new variable for button background color
+  background-color: $color-secondary; 
+  // Uses global dark text color
+  color: $color-text-dark; 
+  padding: 15px 30px;
+  // ... other styles
+
+  &:hover {
+    // A slightly darker version of $color-cta-button-bg for hover state
+    background-color: darken($color-secondary, 5%); 
+  }
+}
+
+// --- Responsive Adjustments ---
+@media (max-width: $breakpoint-desktop) { 
+  .hero-section {
+    min-height: $height-hero-min * 0.9; // 90% of original height
+  }
+  .hero-title {
+    font-size: $font-size-hero-title * 0.8; // 80% of original font size
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .hero-section {
+    min-height: $height-hero-min * 0.8; // 80% of original height
+    justify-content: center; 
+    text-align: center; 
+  }
+  .hero-content {
+    padding-left: 0;
+  }
+  .hero-title {
+    font-size: $font-size-hero-title * 0.6; // 60% of original font size
+  }
+}

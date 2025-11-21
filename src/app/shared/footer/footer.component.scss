@@ -1,0 +1,89 @@
+/* src/app/footer/footer.component.scss */
+
+@import 'variables';
+
+.main-footer {
+  // NOTE: Assuming you fixed $color-black-bg to $color-header-bg or similar in _variables.scss
+  background-color: $color-black-bg; 
+  color: $color-text-light;
+  padding: 30px 20px 10px; /* Reduced bottom padding */
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column; /* Stack columns on mobile */
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto 10px; /* Reduced bottom margin */
+  padding-bottom: 10px; /* Reduced bottom padding */
+}
+
+.footer-links, .footer-contact {
+  margin-bottom: 15px; /* Slightly less vertical separation on mobile */
+}
+
+.footer-links h3, .footer-contact h3 {
+  color: lighten($color-primary, 20%);
+  margin-top: 0;
+  margin-bottom: 8px; /* Slightly reduced spacing */
+  font-size: 1.1em; /* Slightly smaller font for compactness */
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  /* MOBILE DEFAULT: Links remain stacked vertically */
+}
+
+.footer-links a {
+  color: $color-text-light;
+  text-decoration: none;
+  padding: 3px 0; /* Reduced padding */
+  transition: color 0.3s;
+  /* Ensure display:block is here for vertical stacking on mobile */
+  display: block; 
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.footer-contact p {
+  margin: 3px 0; /* Reduced margin */
+}
+
+.footer-copyright {
+  text-align: center;
+  border-top: 1px solid rgba($color-text-light, 0.2); 
+  padding-top: 10px; /* Reduced top padding */
+  padding-bottom: 5px; /* Added very small bottom padding for edge case */
+  font-size: 0.8em; /* Slightly smaller copyright text */
+  opacity: 0.7;
+}
+
+
+/* --- Tablet/Desktop Layout: Horizontal Links and Side-by-Side Content --- */
+@media (min-width: $breakpoint-tablet) {
+  .footer-content {
+    flex-direction: row; /* Content (Quick Links block & Get in Touch block) side-by-side */
+    gap: 80px; /* Increased space for visual separation */
+    justify-content: flex-start;
+  }
+  
+  .footer-links {
+    /* Set up the links container to use flex */
+    .footer-links ul {
+      display: flex; /* Makes the list items horizontal */
+      align-items: center;
+      gap: 20px; /* Space between horizontal links */
+    }
+
+    /* Target the individual links within the horizontal list */
+    .footer-links li a {
+      display: inline-block; /* Treat links as horizontal elements */
+      padding: 0 0; /* Remove vertical padding */
+    }
+  }
+}

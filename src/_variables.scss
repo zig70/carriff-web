@@ -1,0 +1,32 @@
+// --- Site Colors ---
+$color-primary-base: #ff00ff;   // Original Bright Magenta/Purple
+
+// Toned Down Version for solid backgrounds (e.g., Contact button)
+$color-primary-button: darken($color-primary-base, 10%); // Darkens by 10% (e.g., to #e600e6)
+$color-primary-accent: lighten($color-primary-base, 10%); // Lightens by 10%
+
+// Re-map the variable used in components
+$color-primary: $color-primary-button; //
+$color-primary:$color-primary-button;   // Magenta/Purple (for Contact button/highlights)
+$color-secondary: #D0FBF9; // Light Blue (for mobile menu background)
+$color-text-dark: #000;
+$color-text-light: #fff;
+$color-black-bg: #000;
+
+// --- Breakpoints ---
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+// --- New Home Page Variables ---
+$font-size-hero-title: 3.5em;
+$height-hero-min: 500px;
+
+// --- New About Page Variables ---
+$color-about-bg: #1a1a2e; // Dark background for the about section
+$color-about-card-bg: #0d0d18; // Even darker background for the desktop card content
+$about-card-image-width-desktop: 40%; // Width of the image column on desktop
+$about-card-content-width-desktop: 60%; // Width of the text column on desktop
+$height-header: 60px;
+$height-footer: 120px;
+$height-header-mobile: 60px; // Example, adjust based on actual header height
+$height-footer-mobile: 100px; // Example, adjust based on actual footer height
