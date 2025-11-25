@@ -30,6 +30,46 @@
 /* Hide desktop navigation by default (mobile first) */
 .desktop-nav {
   display: none;
+
+  .has-dropdown {
+    position: relative;
+  }
+
+  // Submenu styles (hidden by default)
+  .submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    // Position the dropdown absolutely below the parent link
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 150px;
+    background-color: $color-primary; /* Dark background for the submenu */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    z-index: 20;
+    
+    // Initially hidden
+    display: none; 
+    
+    li a {
+      padding: 10px 15px;
+      // Force dark text if the main link text is light
+      color: $color-text-light;
+      display: block;
+      white-space: nowrap;
+      
+      &:hover {
+        background-color: darken($color-primary, 10%); /* Highlight on hover */
+      }
+    }
+  }
+
+  // Show the submenu on hover of the parent <li>
+  .has-dropdown:hover .submenu {
+    display: block;
+  }
 }
 
 /* --- Mobile Menu Styles (The open/close component) --- */
@@ -50,6 +90,28 @@
   width: 100%;
   background-color: $color-secondary; /* Light blue background as in design */
   z-index: 10; 
+
+  .has-submenu-mobile {
+    // Styling for the main 'Services' link in mobile dropdown (already styled by parent)
+    & > a {
+      position: relative;
+    }
+  }
+
+  .mobile-submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    // Indent the submenu items slightly for hierarchy
+    padding-left: 20px; 
+    
+    li a {
+      // Styling for the nested items (same light blue background)
+      background-color: lighten($color-secondary, 5%);
+      padding: 10px 20px; 
+      border-bottom: none; /* Remove separator line */
+    }
+  }
 }
 
 .mobile-dropdown.open {
@@ -105,6 +167,11 @@
     color: $color-text-light;
     padding: 10px 15px;
     margin: 0 5px;
+    display: inline-block;
+  }
+
+  .desktop-nav li {
+    position: relative; /* CRITICAL for all LIs */
   }
 
   /* Styling for the desktop Contact button */

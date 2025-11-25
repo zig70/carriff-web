@@ -1,1 +1,69 @@
-<p>blog works!</p>
+<div class="blog-page-container">
+    
+    <header class="blog-hero">
+        <h1>Industry Knowledge & Case Studies</h1>
+        <p>Stay ahead with insights into digital transformation, data governance best practices, and success stories from our clients.</p>
+    </header>
+
+    <hr>
+
+    <section class="category-filter">
+        <button 
+          class="filter-btn" 
+          [ngClass]="{'active': activeFilter === 'All Articles'}" 
+          (click)="filterArticles('All Articles')">
+          All Articles
+        </button>
+        <button 
+          class="filter-btn" 
+          [ngClass]="{'active': activeFilter === 'Data Governance'}" 
+          (click)="filterArticles('Data Governance')">
+          Data Governance
+        </button>
+        <button 
+          class="filter-btn" 
+          [ngClass]="{'active': activeFilter === 'Digital Transformation'}" 
+          (click)="filterArticles('Digital Transformation')">
+          Digital Transformation
+        </button>
+        <button 
+          class="filter-btn" 
+          [ngClass]="{'active': activeFilter === 'Case Studies'}" 
+          (click)="filterArticles('Case Studies')">
+          Case Studies
+        </button>
+        <button 
+          class="filter-btn" 
+          [ngClass]="{'active': activeFilter === 'AI & Automation'}" 
+          (click)="filterArticles('AI & Automation')">
+          AI & Automation
+        </button>
+    </section>
+
+    <section class="blog-grid">
+        
+        <article *ngFor="let article of filteredArticles" class="blog-card">
+            <div class="card-image">
+                <img 
+                [src]="article.imageUrl" 
+                [alt]="article.title"
+                class="article-thumbnail">
+                </div>
+            <div class="card-content">
+                <span class="category-tag">{{ article.category }}</span>
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.summary }}</p>
+                <a 
+                  [routerLink]="['/articles', getArticleSlug(article.title)]"
+                  class="read-more">
+                  Read {{ article.category === 'Case Studies' ? 'Full Story' : 'Article' }} →
+                </a>
+            </div>
+        </article>
+        
+        <div *ngIf="filteredArticles.length === 0" class="no-results">
+            <p>No articles found for the selected category.</p>
+        </div>
+        
+    </section>
+</div>

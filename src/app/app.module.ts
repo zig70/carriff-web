@@ -11,6 +11,8 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { DataservicesComponent } from './pages/dataservices/dataservices.component';
+import { ArticleComponent } from './pages/article/article.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     BlogComponent,
     HeaderComponent,
     FooterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DataservicesComponent,
+    ArticleComponent
   ],
   imports: [
     BrowserModule,

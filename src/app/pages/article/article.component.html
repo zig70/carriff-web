@@ -1,0 +1,26 @@
+<main class="article-page-container">
+    
+    <a routerLink="/blog" class="back-link">← Back to Knowledge Hub</a>
+
+    <header class="article-header">
+        <span class="article-category">{{ article?.category }}</span>
+        <h1>{{ article?.title }}</h1>
+        <p class="article-meta">Published by [Author Name]</p>
+    </header>
+
+    <figure class="article-image-container">
+        <img [src]="article?.imageUrl" [alt]="article?.title" class="article-hero-image">
+    </figure>
+
+    <section class="article-content-body">
+        
+        <div [innerHTML]="article?.fullContent"></div> 
+        
+    </section>
+
+    <section class="article-cta">
+        <h2>Ready to Transform Your Data Strategy?</h2>
+        <p>Contact our experts today to schedule a free assessment of your current data governance framework.</p>
+        <button routerLink="/contact" class="cta-button">Speak to an Expert</button>
+    </section>
+</main>

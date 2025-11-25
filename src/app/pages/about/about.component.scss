@@ -8,14 +8,15 @@
   background-color: #1a1a2e; // A dark background, similar to your hero section
   min-height: calc(100vh - ($height-header-mobile + $height-footer-mobile)); // Adjust as needed
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: flex-start; // Align to top for longer content
+  gap: 30px;
 }
 
 .about-card-desktop-wrapper {
   display: flex;
   flex-direction: column; // Stack image and content vertically on mobile
-  max-width: 1000px; // Max width for the entire card on desktop
   width: 100%;
   background-color: $color-black-bg; // Dark background for the card
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
@@ -103,7 +104,6 @@
       left: 0;
       width: 100%;
       height: 100px; // Adjust height as per design
-      background-color: $color-secondary; // Light blue block
       z-index: 1; // Keep it behind text if text overlays
     }
   }
@@ -114,6 +114,8 @@
     object-fit: cover;
     z-index: 2; // Keep image above the pseudo-element
     position: relative; // Needed for z-index to work
+    min-height: 350px;
+    margin: 0 auto;
   }
   
   // Hide the mobile info block on desktop
@@ -127,6 +129,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-height: 350px;
   }
 
   .person-name-desktop {

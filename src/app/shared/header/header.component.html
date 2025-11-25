@@ -7,7 +7,12 @@
 
     <nav class="desktop-nav">
       <ul>
-        <li><a routerLink="/services">Services</a></li>
+        <li class="has-dropdown">
+          <a routerLink="/services">Services</a>
+          <ul class="submenu">
+            <li><a routerLink="/dataservices">Data Services</a></li>
+          </ul>
+        </li>
         <li><a routerLink="/blog">Blog</a></li>
         <li><a routerLink="/about">About</a></li>
         <li><a routerLink="/contact" class="contact-btn">Contact</a></li>
@@ -22,6 +27,9 @@
   <nav class="mobile-dropdown" [class.open]="isMobileMenuOpen">
     <ul>
       <li><a routerLink="/services" (click)="closeMobileMenu()">Services</a></li>
+      <ul class="mobile-submenu">
+          <li><a routerLink="/dataservices" (click)="closeMobileMenu()">Data Services</a></li>
+        </ul>
       <li><a routerLink="/blog" (click)="closeMobileMenu()">Blog</a></li>
       <li><a routerLink="/about" (click)="closeMobileMenu()">About</a></li>
       <li><a routerLink="/contact" class="mobile-contact-btn" (click)="closeMobileMenu()">Contact</a></li>

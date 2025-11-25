@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import 'variables';
 /* src/styles.scss */
 
@@ -14,6 +15,7 @@ html, body {
   height: 100%;      /* Ensures body takes full viewport height */
   overflow-x: hidden; /* Prevents horizontal scrollbar if elements slightly overflow */
   background-color: #0d0d18; /* Set the background to match your hero/about section */
+  font-family: 'Montserrat', sans-serif;
 }
 
 #root, app-root {
