@@ -11,13 +11,7 @@ env:
   REGION: ${{ secrets.GCP_REGION }}
   GCP_SA_EMAIL: ${{ secrets.GCP_SERVICE_ACCOUNT }}
   ARTIFACT_REPO: ${{ secrets.ARTIFACT_REGISTRY_REPO }}
-  
-  # Service Naming
-  SERVICE_NAME: carriff-angular-web  # The name your service will have in Cloud Run
-  
-  # Image URL Construction
-  # Format: [REGION]-docker.pkg.dev/[PROJECT_ID]/[ARTIFACT_REPO]/[SERVICE_NAME]:[SHA_TAG]
-  IMAGE_NAME: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+  SERVICE_NAME: carriff-angular-web
 
 jobs:
   deploy:
@@ -40,21 +34,21 @@ jobs:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ env.GCP_SA_EMAIL }}
 
-      # --- Configure Docker Environment ---
       - name: 3. Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         
       - name: 4. Configure Docker for Artifact Registry
-        # Configures the Docker CLI to authenticate to the specific Artifact Registry domain.
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
         
       # --- Build and Push Container Image ---
+      # This step builds the image and tags it using a single concatenated expression.
       - name: 5. Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: .              # Build from the current directory (where Dockerfile is)
-          push: true              # Push the image to the registry
-          tags: ${{ env.IMAGE_NAME }} # Tag using the full registry path and commit SHA
+          context: .
+          push: true
+          # THE FIX: Construct the IMAGE NAME directly here using all env vars
+          tags: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
           
       # --- Deploy to Cloud Run ---
       - name: 6. Deploy to Cloud Run
@@ -62,8 +56,7 @@ jobs:
         with:
           service: ${{ env.SERVICE_NAME }}
           region: ${{ env.REGION }}
-          image: ${{ env.IMAGE_NAME }}
-          # Ensures the public-facing requirement is met
+          # THE FIX: Construct the IMAGE NAME directly here using all env vars
+          image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
           flags: "--allow-unauthenticated" 
-          # Specifies the internal port the container listens on (from nginx.conf)
           env_vars: "PORT=8080"
