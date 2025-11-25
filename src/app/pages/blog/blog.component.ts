@@ -21,18 +21,18 @@ export class BlogComponent implements OnInit {
   // FIX A: Add the full list of articles data (allArticles)
   allArticles: Article[] = [
     { 
-      title: 'Transforming Customer Onboarding: 40% Efficiency Gain', 
-      category: 'Case Studies', 
-      summary: 'See how our automated quote-and-buy solution streamlined operations for a leading insurance provider.', 
+      title: 'What we have been listening to in 2025', 
+      category: 'Digital Transformation', 
+      summary: 'A little bit of help to breakdown the AI bubble.', 
       link: '#',
-      imageUrl: 'assets/blog-thumbnails/quotenbuy.png'
+      imageUrl: 'assets/blog-thumbnails/topofthepops.png'
     },
     { 
-      title: 'The 5 Pillars of a Modern Data Governance Framework', 
-      category: 'Data Governance', 
-      summary: 'An essential guide to establishing trust and compliance across your enterprise data landscape.', 
+      title: 'The future of Price Comparision sites: Will AI take over?', 
+      category: 'AI & Automation', 
+      summary: 'How consumer purchasing habits in an AI-driven world are challenging comparison marketplaces.', 
       link: '#',
-      imageUrl: 'assets/blog-thumbnails/datagovblogimage.png'
+      imageUrl: 'assets/blog-thumbnails/pcw_aifuture.png'
     },
     { 
       title: 'Beyond Chatbots: Using AI for Hyper-Personalized Marketing', 
@@ -49,11 +49,18 @@ export class BlogComponent implements OnInit {
       imageUrl: 'assets/blog-thumbnails/neuralnetwork.png'
     },
     { 
-      title: 'Case Study: Data Quality Implementation in Finance', 
+      title: 'AI Driven Quality in Month End Reporting', 
       category: 'Case Studies', 
       summary: 'How improving data quality unlocked new regulatory reporting capabilities.', 
       link: '#',
       imageUrl: 'assets/blog-thumbnails/blog_payments.png'
+    },
+    { 
+      title: 'The 5 Pillars of a Modern Data Governance Framework', 
+      category: 'Data Governance', 
+      summary: 'An essential guide to establishing trust and compliance across your enterprise data landscape.', 
+      link: '#',
+      imageUrl: 'assets/blog-thumbnails/datagovblogimage.png'
     },
     // Add more articles here...
   ];
