@@ -29,7 +29,8 @@ COPY --from=builder /app/dist /app/dist
 COPY --from=builder /app/package*.json ./
 
 # Install only production dependencies
-RUN npm install --omit=dev
+RUN npm install 
+#--omit=dev
 ENV NODE_ENV=production
 # Start Angular Universal server
 CMD ["node", "dist/carriff-web/server/main.server.js"]

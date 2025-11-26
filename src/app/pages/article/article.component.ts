@@ -357,22 +357,22 @@ article: Article | undefined;
   fetchArticleData(slug: string): void {
     const foundArticle = this.mockArticles.find(a => this.formatSlug(a.title) === slug);
     
-    if (foundArticle) {
-        // IMPORTANT FIX: Bypass sanitization for the fullContent string
-        //const sanitizedHtmlString = serverDOMPurify.sanitize(foundArticle.fullContent as string);
-        //const safeContent = this.sanitizer.bypassSecurityTrustHtml(foundArticle.fullContent as string);
-        let sanitizedHtmlString: string;
+    
+if (foundArticle) {
+    let sanitizedHtmlString: string;
 
-        // Use the injected DOMPurify instance if available (Server/Node)
-        if (this.domPurifyInstance) {
-            sanitizedHtmlString = this.domPurifyInstance.sanitize(foundArticle.fullContent as string);
-        } else if ((window as any).DOMPurify) {
-            // Fallback for browser (already initialized global instance)
-            sanitizedHtmlString = (window as any).DOMPurify.sanitize(foundArticle.fullContent as string);
-        } else {
-             // Fallback: If no sanitizer is found (local dev), use the original content
-             sanitizedHtmlString = foundArticle.fullContent as string;
-        }
+    if (isPlatformBrowser(this.platformId)) {
+      // Browser: safe to use window
+      if ((window as any).DOMPurify) {
+        sanitizedHtmlString = (window as any).DOMPurify.sanitize(foundArticle.fullContent as string);
+      } else {
+        sanitizedHtmlString = foundArticle.fullContent as string;
+      }
+    } else {
+      // Server: avoid window, use fallback or skip sanitisation
+      sanitizedHtmlString = foundArticle.fullContent as string;
+    }
+
 
         const safeContent = this.sanitizer.bypassSecurityTrustHtml(sanitizedHtmlString);
 
