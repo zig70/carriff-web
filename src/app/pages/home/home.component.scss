@@ -1,11 +1,11 @@
-/* src/app/home/home.component.scss */
-@import 'variables';
+@use 'variables' as var;
+@use "sass:color";
 
 .hero-section {
   position: relative;
   width: 100%;
   // Uses new variable for minimum height
-  min-height: calc(100vh - $height-header - $height-footer);
+  min-height: calc(100vh - var.$height-header - var.$height-footer);
   display: flex;
   align-items: center; 
   justify-content: flex-start; 
@@ -20,14 +20,14 @@
 .hero-content {
   max-width: 600px;
   // Uses global light text color
-  color: $color-text-light; 
+  color: var.$color-text-light; 
   text-align: left;
   padding-left: 5%; 
 }
 
 .hero-title {
   // Uses new variable for hero title font size
-  font-size: $font-size-hero-title; 
+  font-size: var.$font-size-hero-title; 
   line-height: 1.1; 
   margin-bottom: 20px;
   font-weight: bold; 
@@ -35,8 +35,8 @@
 }
 
 .hero-cta-button {
-  background-color: $color-primary; 
-  color: $color-text-dark; 
+  background-color: var.$color-primary; 
+  color: var.$color-text-dark; 
   text-decoration: none; /* Remove underline */
   cursor: pointer;
   padding: 15px 30px;
@@ -46,30 +46,30 @@
   padding: 15px 30px;
   border: none;
   transition: all 0.3s ease;
-  box-shadow: 0 0 15px rgba($color-primary, 0.6);
+  box-shadow: 0 0 15px rgba(var.$color-primary, 0.6);
   font-weight: 600;
 
   &:hover {
-    // A slightly darker version of $color-cta-button-bg for hover state
-    background-color: darken($color-primary, 5%); 
-    box-shadow: 0 0 25px rgba($color-primary, 1);
+    // A slightly darker version of var.$color-cta-button-bg for hover state
+    background-color: color.adjust(var.$color-primary, $lightness: -5%); 
+    box-shadow: 0 0 25px rgba(var.$color-primary, 1);
     transform: translateY(-2px);
   }
 }
 
 // --- Responsive Adjustments ---
-@media (max-width: $breakpoint-desktop) { 
+@media (max-width: var.$breakpoint-desktop) { 
   .hero-section {
-    min-height: $height-hero-min * 0.9; // 90% of original height
+    min-height: var.$height-hero-min * 0.9; // 90% of original height
   }
   .hero-title {
-    font-size: $font-size-hero-title * 0.8; // 80% of original font size
+    font-size: var.$font-size-hero-title * 0.8; // 80% of original font size
   }
 }
 
-@media (max-width: $breakpoint-tablet) {
+@media (max-width: var.$breakpoint-tablet) {
   .hero-section {
-    min-height: $height-hero-min * 0.8; // 80% of original height
+    min-height: var.$height-hero-min * 0.8; // 80% of original height
     justify-content: center; 
     text-align: center; 
   }
@@ -77,6 +77,6 @@
     padding-left: 0;
   }
   .hero-title {
-    font-size: $font-size-hero-title * 0.6; // 60% of original font size
+    font-size: var.$font-size-hero-title * 0.6; // 60% of original font size
   }
 }

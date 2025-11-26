@@ -1,8 +1,10 @@
-@import 'variables';
+@use 'variables' as var;
+@use "sass:color";
+
 /* Base styles for the dark header */
 .main-header {
-  background-color: $color-black-bg;
-  color: $color-text-light;
+  background-color: var.$color-black-bg;
+  color: var.$color-text-light;
 }
 
 .header-content {
@@ -16,7 +18,7 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: $color-text-light;
+  color: var.$color-text-light;
   font-weight: bold; /* Carriff Digital brand name */
 }
 
@@ -46,7 +48,7 @@
     top: 100%;
     left: 0;
     min-width: 150px;
-    background-color: $color-primary; /* Dark background for the submenu */
+    background-color: var.$color-primary; /* Dark background for the submenu */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     z-index: 20;
     
@@ -56,12 +58,12 @@
     li a {
       padding: 10px 15px;
       // Force dark text if the main link text is light
-      color: $color-text-light;
+      color: var.$color-text-light;
       display: block;
       white-space: nowrap;
       
       &:hover {
-        background-color: darken($color-primary, 10%); /* Highlight on hover */
+        background-color: color.adjust(var.$color-primary, $lightness: -10%); /* Highlight on hover */
       }
     }
   }
@@ -76,7 +78,7 @@
 .mobile-menu-toggle {
   background: none;
   border: none;
-  color: $color-text-light;
+  color: var.$color-text-light;
   font-size: 24px;
   cursor: pointer;
   /* Show hamburger on mobile */
@@ -88,7 +90,7 @@
   display: none;
   position: absolute; /* Place it below the header */
   width: 100%;
-  background-color: $color-secondary; /* Light blue background as in design */
+  background-color: var.$color-secondary; /* Light blue background as in design */
   z-index: 10; 
 
   .has-submenu-mobile {
@@ -107,7 +109,7 @@
     
     li a {
       // Styling for the nested items (same light blue background)
-      background-color: lighten($color-secondary, 5%);
+      background-color: color.adjust(var.$color-secondary, $lightness: 5%);
       padding: 10px 20px; 
       border-bottom: none; /* Remove separator line */
     }
@@ -129,17 +131,17 @@
   padding: 15px 20px;
   text-decoration: none;
   color: #000;
-  border-bottom: 1px solid $color-secondary; /* Light separator line */
+  border-bottom: 1px solid var.$color-secondary; /* Light separator line */
 }
 
 /* Contact button in mobile menu */
 .mobile-contact-btn {
-  background-color: $color-primary; /* Magenta/Purple color as in design */
-  color: $color-text-light!important;
+  background-color: var.$color-primary; /* Magenta/Purple color as in design */
+  color: var.$color-text-light!important;
   font-weight: bold;
 }
 
-@media (min-width: $breakpoint-tablet) {
+@media (min-width: var.$breakpoint-tablet) {
   /* Hide the mobile hamburger button */
   .mobile-menu-toggle {
     display: none;
@@ -164,7 +166,7 @@
 
   .desktop-nav li a {
     text-decoration: none;
-    color: $color-text-light;
+    color: var.$color-text-light;
     padding: 10px 15px;
     margin: 0 5px;
     display: inline-block;
@@ -176,7 +178,7 @@
 
   /* Styling for the desktop Contact button */
   .contact-btn {
-    background-color: $color-primary; /* Magenta/Purple button */
+    background-color: var.$color-primary; /* Magenta/Purple button */
     padding: 10px 20px !important;
     border-radius: 5px; /* Optional: smooth corners */
     font-weight: bold;

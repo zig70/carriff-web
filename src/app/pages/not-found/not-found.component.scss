@@ -1,7 +1,4 @@
-/* src/app/not-found/not-found.component.scss */
-
-// Use global variables: $color-text-light
-@import 'variables';
+@use 'variables' as var;
 
 .not-found-section {
   display: flex;
@@ -37,7 +34,7 @@
 .text-overlay {
   text-align: center;
   padding: 40px;
-  color: $color-text-light;
+  color: var.$color-text-light;
   background-color: rgba(0, 0, 0, 0.3); /* Slight overlay for better text readability */
   border-radius: 8px;
 }
@@ -66,7 +63,7 @@
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: $color-text-light;
+  color: var.$color-text-light;
   font-weight: bold;
 }
 

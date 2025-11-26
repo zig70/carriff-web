@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
+import { DOMPURIFY_TOKEN } from '../../providers/dompurify-token';
+
+
+    
+let domPurifyInstance: any = null;
 
 interface Article {
   title: string;
@@ -14,15 +21,20 @@ interface Article {
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
-  styleUrls: ['./article.component.scss']
+  styleUrls: ['./article.component.scss'],
+  standalone: true,
+  imports: [RouterLink]
 })
 export class ArticleComponent implements OnInit {
 article: Article | undefined; 
 
   // Inject ActivatedRoute into the constructor
   constructor(private route: ActivatedRoute,
-    private sanitizer: DomSanitizer 
+    private sanitizer: DomSanitizer,
+
   ) { }
+
+ domPurifyInstance: any = inject(DOMPURIFY_TOKEN, { optional: true }) 
 
   ngOnInit(): void {
     // 1. Subscribe to changes in the URL parameters
@@ -317,6 +329,27 @@ article: Article | undefined;
   ];
   // -------------------------------------------------------------
 
+  private platformId = inject(PLATFORM_ID);
+  
+  // Method to get the sanitizer instance (Node-safe)
+  getDomPurifyInstance() {
+    // If running in the browser, use the global DOMPurify if it exists
+    if (isPlatformBrowser(this.platformId) && (window as any).DOMPurify) {
+        return (window as any).DOMPurify;
+    }
+    
+    // If running on the server, try to initialize the instance once
+    if (!isPlatformBrowser(this.platformId) && !domPurifyInstance) {
+        try {
+
+        } catch (e) {
+           
+        }
+    }
+    
+    // For this specific error, let's use the simplest SSR-safe solution:
+    return domPurifyInstance; // or fallback to a standard sanitizer if needed
+  }
   /**
    * Finds the article data based on the URL slug.
    * @param slug The article slug from the URL.
@@ -326,7 +359,22 @@ article: Article | undefined;
     
     if (foundArticle) {
         // IMPORTANT FIX: Bypass sanitization for the fullContent string
-        const safeContent = this.sanitizer.bypassSecurityTrustHtml(foundArticle.fullContent as string); //
+        //const sanitizedHtmlString = serverDOMPurify.sanitize(foundArticle.fullContent as string);
+        //const safeContent = this.sanitizer.bypassSecurityTrustHtml(foundArticle.fullContent as string);
+        let sanitizedHtmlString: string;
+
+        // Use the injected DOMPurify instance if available (Server/Node)
+        if (this.domPurifyInstance) {
+            sanitizedHtmlString = this.domPurifyInstance.sanitize(foundArticle.fullContent as string);
+        } else if ((window as any).DOMPurify) {
+            // Fallback for browser (already initialized global instance)
+            sanitizedHtmlString = (window as any).DOMPurify.sanitize(foundArticle.fullContent as string);
+        } else {
+             // Fallback: If no sanitizer is found (local dev), use the original content
+             sanitizedHtmlString = foundArticle.fullContent as string;
+        }
+
+        const safeContent = this.sanitizer.bypassSecurityTrustHtml(sanitizedHtmlString);
 
         this.article = {
             ...foundArticle,

@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as var;
 
 // --- Services Grid Container ---
 .services-grid-container {
@@ -9,7 +9,7 @@
 
 .services-grid-container h2 {
     margin-bottom: 30px;
-    color: $color-text-dark;
+    color: var.$color-text-dark;
 }
 
 // --- CSS Grid Setup (Mobile First: 1 Column) ---
@@ -23,8 +23,8 @@
 }
 
 // --- Tablet Layout (2 Columns) ---
-// Using your $breakpoint-tablet (768px)
-@media (min-width: $breakpoint-tablet) {
+// Using your var.$breakpoint-tablet (768px)
+@media (min-width: var.$breakpoint-tablet) {
     .services-grid {
         // Tablet: 2 columns
         grid-template-columns: repeat(2, 1fr); 
@@ -32,8 +32,8 @@
 }
 
 // --- Desktop Layout (3 Columns) ---
-// Using your $breakpoint-desktop (1024px)
-@media (min-width: $breakpoint-desktop) {
+// Using your var.$breakpoint-desktop (1024px)
+@media (min-width: var.$breakpoint-desktop) {
     .services-grid {
         // Desktop: 3 columns (desired layout)
         grid-template-columns: repeat(3, 1fr); 
@@ -49,7 +49,7 @@
 // 2. Styling for all service blocks (both clickable and non-clickable)
 .service-block,
 .service-block-link .service-block { /* Target the inner block for styling */
-    background-color: $color-text-light; // White
+    background-color: var.$color-text-light; // White
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -75,12 +75,12 @@
 
 .icon-placeholder {
     font-size: 40px;
-    color: $color-primary; // Your primary brand color
+    color: var.$color-primary; // Your primary brand color
     margin-bottom: 15px;
 }
 
 h3 {
-    color: $color-text-dark;
+    color: var.$color-text-dark;
     font-size: 1.35em;
     margin-bottom: 10px;
 }

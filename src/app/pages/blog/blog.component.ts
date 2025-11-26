@@ -1,6 +1,8 @@
 // src/app/blog/blog.component.ts
 
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 interface Article {
   title: string;
@@ -10,16 +12,7 @@ interface Article {
   imageUrl: string;
 }
 
-@Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
-})
-export class BlogComponent implements OnInit {
-  activeFilter: Article['category'] = 'All Articles';
-
-  // FIX A: Add the full list of articles data (allArticles)
-  allArticles: Article[] = [
+export const allArticles: Article[] = [
     { 
       title: 'What we have been listening to in 2025', 
       category: 'Digital Transformation', 
@@ -65,7 +58,17 @@ export class BlogComponent implements OnInit {
     // Add more articles here...
   ];
 
-  // FIX B: Add the array that the template will display (filteredArticles)
+@Component({
+  selector: 'app-blog',
+  templateUrl: './blog.component.html',
+  styleUrls: ['./blog.component.scss'],
+  standalone: true,
+  imports: [NgClass, RouterLink]
+})
+export class BlogComponent implements OnInit {
+  activeFilter: Article['category'] = 'All Articles';
+
+  allArticles = allArticles;
   filteredArticles: Article[] = []; 
 
   constructor() { }

@@ -42,7 +42,9 @@
 
     <section class="blog-grid">
         
-        <article *ngFor="let article of filteredArticles" class="blog-card">
+        
+        @for (article of filteredArticles; track article) {
+          <article class="blog-article blog-card">
             <div class="card-image">
                 <img 
                 [src]="article.imageUrl" 
@@ -60,10 +62,13 @@
                 </a>
             </div>
         </article>
+      }
         
-        <div *ngIf="filteredArticles.length === 0" class="no-results">
+        
+      @if (filteredArticles.length === 0) {
+        <div class="no-results">
             <p>No articles found for the selected category.</p>
         </div>
-        
+      }
     </section>
 </div>

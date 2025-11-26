@@ -1,10 +1,11 @@
-@import 'variables';
+@use 'variables' as var;
+@use "sass:color";
 
 .article-page-container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: $padding-large 20px;
-    color: $color-text-light; // Assuming a light page background for the body text
+    padding: var.$padding-large 20px;
+    color: var.$color-text-light; // Assuming a light page background for the body text
 }
 
 .back-link {
@@ -15,7 +16,7 @@
     font-weight: 500;
     transition: color 0.2s;
     &:hover {
-        color: $color-primary;
+        color: var.$color-primary;
     }
 }
 
@@ -26,15 +27,15 @@
     margin-bottom: 30px;
 
     background-color: #1a1a2e; /* Use a dark, but distinct background from the page background */
-    color: $color-text-light; /* Ensure text is light/white */
+    color: var.$color-text-light; /* Ensure text is light/white */
     border-radius: 8px;
     
     .article-category {
         display: inline-block;
         font-size: 0.9em;
         font-weight: 700;
-        color: $color-primary;
-        border: 2px solid $color-primary;
+        color: var.$color-primary;
+        border: 2px solid var.$color-primary;
         padding: 5px 15px;
         border-radius: 25px;
         margin-bottom: 10px;
@@ -43,7 +44,7 @@
     h1 {
         font-size: 3em;
         margin-bottom: 10px;
-        color: $color-text-light;
+        color: var.$color-text-light;
     }
     .article-meta {
         color: #b0b0b0;
@@ -66,7 +67,7 @@
 
 // --- Content Body ---
 .article-content-body {
-    max-width: $max-width-content; // Constrain the reading width
+    max-width: var.$max-width-content; // Constrain the reading width
     margin: 0 auto 50px;
     line-height: 1.7;
     font-size: 1.1em;
@@ -83,7 +84,7 @@
     // Basic typography reset/styles
     h2 {
         font-size: 2em;
-        color: $color-text-light;
+        color: var.$color-text-light;
         margin-top: 40px;
         margin-bottom: 15px;
     }
@@ -95,12 +96,12 @@
     
     // Blockquote styling for pull-quotes
     blockquote {
-        border-left: 5px solid $color-primary;
+        border-left: 5px solid var.$color-primary;
         padding: 15px 20px;
         margin: 30px 0;
-        background-color: $color-text-light;
+        background-color: var.$color-text-light;
         font-style: italic;
-        color: $color-text-dark;;
+        color: var.$color-text-dark;;
         font-size: 1.2em;
     }
 }
@@ -111,19 +112,19 @@
     padding: 40px;
     border-radius: 8px;
     text-align: center;
-    max-width: $max-width-content + 100px;
+    max-width: var.$max-width-content + 100px;
     margin: 0 auto;
-    color: $color-text-dark;
+    color: var.$color-text-dark;
 
     h2 {
-        color: $color-text-dark;
+        color: var.$color-text-dark;
         font-size: 1.8em;
         margin-bottom: 10px;
     }
 
     .cta-button {
-        background-color: $color-primary;
-        color: $color-text-light;
+        background-color: var.$color-primary;
+        color: var.$color-text-light;
         border: none;
         padding: 12px 25px;
         font-size: 1em;
@@ -135,7 +136,7 @@
         display: inline-block;
 
         &:hover {
-            background-color: darken($color-primary, 10%);
+            background-color: color.adjust(var.$color-primary, $lightness: -10%);
         }
     }
 }

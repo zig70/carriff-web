@@ -1,12 +1,10 @@
-/* src/app/about/about.component.scss */
-
-// Import global variables (if not already imported globally in styles.scss)
-@import 'variables';
+@use 'variables' as var;
+@use "sass:color";
 
 .about-section {
   padding: 40px 20px;
   background-color: #1a1a2e; // A dark background, similar to your hero section
-  min-height: calc(100vh - ($height-header-mobile + $height-footer-mobile)); // Adjust as needed
+  min-height: calc(100vh - (var.$height-header-mobile + var.$height-footer-mobile)); // Adjust as needed
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,7 +16,7 @@
   display: flex;
   flex-direction: column; // Stack image and content vertically on mobile
   width: 100%;
-  background-color: $color-black-bg; // Dark background for the card
+  background-color: var.$color-black-bg; // Dark background for the card
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   overflow: hidden; // Ensures rounded corners clip content
@@ -39,8 +37,8 @@
 }
 
 .about-card-info-mobile {
-  background-color: $color-secondary; // Light blue background
-  color: $color-text-dark;
+  background-color: var.$color-secondary; // Light blue background
+  color: var.$color-text-dark;
   padding: 20px;
   text-align: left;
   
@@ -56,7 +54,7 @@
 
 .about-card-content {
   padding: 30px;
-  color: $color-text-light; // Light text color for readability
+  color: var.$color-text-light; // Light text color for readability
   text-align: left;
 }
 
@@ -65,14 +63,14 @@
   font-size: 2.2em;
   margin-top: 0;
   margin-bottom: 5px;
-  color: $color-text-light;
+  color: var.$color-text-light;
 }
 
 .person-subtitle {
   font-size: 1.5em;
   margin-top: 0;
   margin-bottom: 20px;
-  color: lighten($color-primary, 20%); // A lighter shade of magenta for subtitle
+  color: color.adjust(var.$color-primary, $lightness: 20%); // A lighter shade of magenta for subtitle
 }
 
 .person-description {
@@ -83,12 +81,9 @@
 }
 
 /* --- Desktop Styles --- */
-@media (min-width: $breakpoint-tablet) {
+@media (min-width: var.$breakpoint-tablet) {
   .about-card-desktop-wrapper {
     flex-direction: row; // Arrange image and content side-by-side
-    // background-color: $color-header-bg; // Ensure full card has dark background
-    // Remove individual background for content if card has one.
-    // The design has a darker black for the text background
     background-color: #0d0d18; 
   }
 

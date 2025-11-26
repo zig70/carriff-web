@@ -1,11 +1,8 @@
-/* src/app/contact/contact.component.scss */
-
-// Using global variables: $color-text-dark, $color-text-light, $color-primary, $breakpoint-tablet
-@import 'variables';
+@use 'variables' as var;
 
 .contact-section {
   padding: 40px 20px;
-  background-color: $color-text-light; // White background for the whole section
+  background-color: var.$color-text-light; // White background for the whole section
   min-height: calc(100vh - 160px); // Ensures component fills remaining vertical space
   display: flex;
   justify-content: center;
@@ -48,7 +45,7 @@
   
   .cta-title {
     font-size: 4em;
-    color: $color-text-light;
+    color: var.$color-text-light;
     font-weight: bold;
     margin: 0;
   }
@@ -56,8 +53,8 @@
 
 /* --- Right Panel (Details) --- */
 .contact-details-panel {
-  background-color: $color-text-light; 
-  color: $color-text-dark;
+  background-color: var.$color-text-light; 
+  color: var.$color-text-dark;
   padding: 30px;
   display: flex;
   align-items: center; 
@@ -80,7 +77,7 @@
 }
 
 .email {
-  color: $color-primary; // Highlight the email address with your primary color
+  color: var.$color-primary; // Highlight the email address with your primary color
   font-weight: bold;
 }
 
@@ -88,7 +85,7 @@
   font-style: italic;
   margin: 30px 0;
   font-size: 1.1em;
-  border-left: 3px solid $color-primary; // Small visual accent
+  border-left: 3px solid var.$color-primary; // Small visual accent
   padding-left: 10px;
 }
 
@@ -97,16 +94,16 @@
 }
 
 .detail-value a {
-  color: $color-text-dark;
+  color: var.$color-text-dark;
   text-decoration: none;
   &:hover {
-    color: $color-primary;
+    color: var.$color-primary;
     text-decoration: underline;
   }
 }
 
 /* --- Desktop and Tablet Layout --- */
-@media (min-width: $breakpoint-tablet) {
+@media (min-width: var.$breakpoint-tablet) {
   .contact-card-wrapper {
     flex-direction: row; // Two columns side-by-side
     min-height: 500px; // Set a fixed height for the two-column layout

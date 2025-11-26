@@ -33,7 +33,6 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ env.GCP_SA_EMAIL }}
-          audience: ${{ secrets.WIF_PROVIDER }}
 
       - name: 3. Set up Docker Buildx
         uses: docker/setup-buildx-action@v3

@@ -1,9 +1,10 @@
+@use "sass:color";
 // --- Site Colors ---
 $color-primary-base: #ff00ff;   // Original Bright Magenta/Purple
 
 // Toned Down Version for solid backgrounds (e.g., Contact button)
-$color-primary-button: darken($color-primary-base, 10%); // Darkens by 10% (e.g., to #e600e6)
-$color-primary-accent: lighten($color-primary-base, 10%); // Lightens by 10%
+$color-primary-button: color.adjust($color-primary-base, $lightness: -10%); // Darkens by 10% (e.g., to #e600e6)
+$color-primary-accent: color.adjust($color-primary-base, $lightness: 10%); // Lightens by 10%
 
 // Re-map the variable used in components
 $color-primary: $color-primary-button; //
