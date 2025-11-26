@@ -1,39 +1,38 @@
-FROM node:20-slim AS builder
 
-# Set the working directory
+FROM node:20 AS builder
+
+# Set working directory
 WORKDIR /app
 
-# Copy package files to install dependencies
-COPY package.json package-lock.json ./
-RUN npm ci
+# Copy package files first for caching
+COPY package*.json ./
 
-# Copy the entire source code
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application
 COPY . .
 
-RUN npm run build
+# Build Angular SSR (browser + server bundles)
+RUN npm run build:ssr
 
-# Stage 2: Create the Final Server Image (Minimal & Secure)
-FROM gcr.io/google.com/cloudsdk/google-cloud-cli:latest-slim
+# -------------------------
+# Stage 2: Run Angular SSR
+# -------------------------
+FROM node:20-slim AS runner
 
-# Set the working directory
-WORKDIR /usr/src/app
+# Set working directory
+WORKDIR /app
 
-# Copy necessary files from the builder stage
-# Replace 'carriff-web' with your actual project name from angular.json output
-COPY --from=builder /app/dist/carriff-web/browser ./browser
-COPY --from=builder /app/dist/carriff-web/server/main.js ./server/main.js
-COPY --from=builder /app/package.json .
+# Copy built files from builder stage
+COPY --from=builder /app/dist /app/dist
+COPY --from=builder /app/package*.json ./
 
-# Install production dependencies only
+# Install only production dependencies
 RUN npm install --omit=dev
 
-# Cloud Run expects the application to listen on the PORT environment variable
-# that it provides. The Angular SSR server is typically configured to use this.
-ENV PORT 8080
+# Expose Cloud Run port
+ENV PORT=8080
 
-# Expose the default port (optional, but good practice)
-EXPOSE 8080
-
-# Command to run the SSR server using Node.js
-# Ensure this path matches the output of your ng build command
-CMD ["node", "server/main.js"]
+# Start Angular Universal server
+CMD ["node", "dist/carriff-web/server/main.js"]
