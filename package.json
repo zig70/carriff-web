@@ -10,7 +10,7 @@
     "serve:ssr:carriff-web": "node dist/carriff-web/server/server.mjs",
     "dev:ssr": "ng serve --ssr",
     "serve:ssr": "node dist/carriff-web/server/server.mjs",
-    "build:ssr": "ng build --ssr",
+    "build:ssr": "ng build --configuration production",
     "prerender": "ng run carriff-web:prerender"
   },
   "prettier": {
