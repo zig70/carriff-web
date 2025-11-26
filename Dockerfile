@@ -16,6 +16,8 @@ COPY . .
 # Build Angular SSR (browser + server bundles)
 RUN npm run build:ssr
 
+RUN npx tsc server.ts --module esnext --target es2020 --outDir dist/carriff-web/server
+
 # -------------------------
 # Stage 2: Run Angular SSR
 # -------------------------
@@ -32,4 +34,4 @@ COPY --from=builder /app/package*.json ./
 RUN npm install --omit=dev
 ENV NODE_ENV=production
 # Start Angular Universal server
-CMD ["node", "--experimental-specifier-resolution=node", "dist/carriff-web/server/main.server.mjs"]
+CMD ["node", "--experimental-specifier-resolution=node", "dist/carriff-web/server/main.server.js"]
