@@ -31,8 +31,5 @@ COPY --from=builder /app/package*.json ./
 # Install only production dependencies
 RUN npm install --omit=dev
 
-# Expose Cloud Run port
-ENV PORT=8080
-
 # Start Angular Universal server
 CMD ["node", "dist/carriff-web/server/main.js"]

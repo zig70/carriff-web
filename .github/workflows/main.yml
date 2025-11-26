@@ -59,4 +59,3 @@ jobs:
           # THE FIX: Construct the IMAGE NAME directly here using all env vars
           image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
           flags: "--allow-unauthenticated" 
-          env_vars: "PORT=8080"
