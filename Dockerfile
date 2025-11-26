@@ -10,8 +10,6 @@ RUN npm ci
 # Copy the entire source code
 COPY . .
 
-# Build the Angular application for production (includes SSR bundle)
-# Use the correct outputPath if different from 'dist/carriff-web'
 RUN npm run build
 
 # Stage 2: Create the Final Server Image (Minimal & Secure)
