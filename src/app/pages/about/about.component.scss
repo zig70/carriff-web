@@ -20,12 +20,15 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   overflow: hidden; // Ensures rounded corners clip content
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .about-card-image {
   flex-shrink: 0; // Prevent image from shrinking
   text-align: center;
   position: relative; // For the mobile info block
+  background-color: var.$color-black-bg;
 }
 
 .about-card-image img {
@@ -80,6 +83,13 @@
   margin: 0 auto;
 }
 
+.person-description-end {
+  font-size: 1.1em;
+  line-height: 1.6;
+  max-width: 700px; // Limit line length for readability
+  margin: 16px 16px 0px 16px;
+}
+
 /* --- Desktop Styles --- */
 @media (min-width: var.$breakpoint-tablet) {
   .about-card-desktop-wrapper {
@@ -88,9 +98,10 @@
   }
 
   .about-card-image {
-    width: 40%; // Image takes 40% of the width
+    flex-basis: 40%; // Image takes 40% of the width
     max-width: 400px; // Limit the max width of the image section
     position: relative;
+    background-color: #0d0d18;
     // Add the light blue block below the image directly in the image container
     &::after {
       content: '';
@@ -99,18 +110,20 @@
       left: 0;
       width: 100%;
       height: 100px; // Adjust height as per design
+      background-color: var.$color-secondary;
       z-index: 1; // Keep it behind text if text overlays
     }
   }
 
   .about-card-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
     z-index: 2; // Keep image above the pseudo-element
     position: relative; // Needed for z-index to work
     min-height: 350px;
     margin: 0 auto;
+    display: block;
   }
   
   // Hide the mobile info block on desktop
@@ -119,7 +132,7 @@
   }
 
   .about-card-content {
-    width: 60%; // Content takes 60% of the width
+    flex-grow: 1; 
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -133,5 +146,16 @@
 
   .person-subtitle {
     margin-top: 5px;
+  }
+
+  .about-card-content > ul.person-description {
+      padding-left: 20px;
+      margin-top: 20px;
+
+  .person-description {
+    // Center text content within the content block
+    max-width: 100%; // Remove the general max-width for the block
+    margin: 0; // Reset margin on desktop
+  }
   }
 }

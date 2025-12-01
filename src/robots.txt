@@ -1,0 +1,10 @@
+User-agent: *
+
+Allow: /
+
+Disallow: /main-es5.js
+Disallow: /polyfills-es5.js
+Disallow: /*?
+Disallow: /api/
+
+Sitemap: https://carriffdigital.com/sitemap.xml

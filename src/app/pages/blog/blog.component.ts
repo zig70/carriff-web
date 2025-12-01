@@ -3,6 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { SeoService } from '../../seo.service';
 
 interface Article {
   title: string;
@@ -71,11 +72,17 @@ export class BlogComponent implements OnInit {
   allArticles = allArticles;
   filteredArticles: Article[] = []; 
 
-  constructor() { }
+  constructor(private seoService: SeoService) { }
 
   ngOnInit(): void {
     // This calls the filter logic on load to display all initial articles
     this.filterArticles(this.activeFilter);
+    this.seoService.setStaticTags({
+      title: 'Blog',
+      description: 'Sharing our thoughts at Carriff Digital.',
+      url: 'blog', // Just the path segment
+      //image: 'assets/social-share-about.jpg' // Optional social sharing image
+    });
   }
 
   // FIX C: Implement the complete filtering logic

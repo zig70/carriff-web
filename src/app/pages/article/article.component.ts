@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { DOMPURIFY_TOKEN } from '../../providers/dompurify-token';
-
+import { SeoService } from './../../seo.service';
 
     
 let domPurifyInstance: any = null;
@@ -31,7 +31,7 @@ article: Article | undefined;
   // Inject ActivatedRoute into the constructor
   constructor(private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-
+    private seoService: SeoService,
   ) { }
 
  domPurifyInstance: any = inject(DOMPURIFY_TOKEN, { optional: true }) 
@@ -359,6 +359,7 @@ article: Article | undefined;
     
     
 if (foundArticle) {
+    this.seoService.generateTags(foundArticle);
     let sanitizedHtmlString: string;
 
     if (isPlatformBrowser(this.platformId)) {
