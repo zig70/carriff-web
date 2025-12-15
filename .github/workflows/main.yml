@@ -38,7 +38,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
         
       - name: 4. Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+        run: gcloud auth configure-docker europe-west2-docker.pkg.dev
         
       # --- Build and Push Container Image ---
       # This step builds the image and tags it using a single concatenated expression.
@@ -48,7 +48,7 @@ jobs:
           context: .
           push: true
           # THE FIX: Construct the IMAGE NAME directly here using all env vars
-          tags: europe-west1-docker.pkg.dev/carriffdigital/carriffdigital-web/carriff-angular-web:latest
+          tags: europe-west2-docker.pkg.dev/carriffdigital/carriffdigital-web/carriff-angular-web:latest
 
           
       # --- Deploy to Cloud Run ---
@@ -58,5 +58,5 @@ jobs:
           service: ${{ env.SERVICE_NAME }}
           region: ${{ env.REGION }}
           # THE FIX: Construct the IMAGE NAME directly here using all env vars
-          image: europe-west1-docker.pkg.dev/carriffdigital/carriffdigital-web/carriff-angular-web:latest
+          image: europe-west2-docker.pkg.dev/carriffdigital/carriffdigital-web/carriff-angular-web:latest
           flags: "--allow-unauthenticated" 
