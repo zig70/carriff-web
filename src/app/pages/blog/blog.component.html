@@ -43,13 +43,16 @@
     <section class="blog-grid">
         
         
-        @for (article of filteredArticles; track article) {
+        @for (article of filteredArticles; track article; let i = $index) {
           <article class="blog-article blog-card">
             <div class="card-image">
                 <img 
-                [src]="article.imageUrl" 
-                [alt]="article.title"
-                class="article-thumbnail">
+                  [ngSrc]="article.imageUrl" 
+                  [alt]="article.title"
+                  fill
+                  class="article-thumbnail"
+                  [priority]="i < 6"
+                >
                 </div>
             <div class="card-content">
                 <span class="category-tag">{{ article.category }}</span>

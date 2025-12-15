@@ -9,7 +9,14 @@
     </header>
 
     <figure class="article-image-container">
-        <img [src]="article?.imageUrl" [alt]="article?.title" class="article-hero-image">
+        <img 
+            [ngSrc]="article?.imageUrl || ''" 
+            [alt]="article?.title" 
+            width="700" 
+            height="400" 
+            priority
+            class="article-hero-image"
+        >
     </figure>
 
     <section class="article-content-body">

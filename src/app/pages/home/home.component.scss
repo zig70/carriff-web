@@ -11,10 +11,12 @@
   justify-content: flex-start; 
   padding: 20px; 
 
-  background-image: url('/assets/AutomationSimple1.png');
-  background-size: cover; 
-  background-position: center center; 
-  background-repeat: no-repeat;
+  isolation: isolate;
+}
+
+.hero-background-img {
+  object-fit: cover; // Mimics background-size: cover
+  z-index: -1;       // Puts image behind the text
 }
 
 .hero-content {

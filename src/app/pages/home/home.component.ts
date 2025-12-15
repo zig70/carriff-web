@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { NgOptimizedImage } from '@angular/common';
 import { SeoService } from '../../seo.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { SeoService } from '../../seo.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [RouterLink]
+  imports: [RouterLink, NgOptimizedImage]
 })
 export class HomeComponent {
   constructor(private seoService: SeoService) { }

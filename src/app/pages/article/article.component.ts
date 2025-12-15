@@ -1,5 +1,5 @@
 import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
@@ -23,7 +23,7 @@ interface Article {
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss'],
   standalone: true,
-  imports: [RouterLink]
+  imports: [RouterLink, NgOptimizedImage]
 })
 export class ArticleComponent implements OnInit {
 article: Article | undefined; 
@@ -52,7 +52,7 @@ article: Article | undefined;
       title: 'The 5 Pillars of a Modern Data Governance Framework',
       category: 'Data Governance',
       summary: 'An essential guide...',
-      imageUrl: 'assets/blog-thumbnails/datagovblogimage.png',
+      imageUrl: 'assets/blog-thumbnails/datagovblogimage.webp',
       // Ensure the slug matches the URL path!
       slug: 'the-5-pillars-of-modern-data-governance-framework', 
       fullContent: `<p>In today's data-intensive landscape, a robust Data Governance (DG) framework is no longer a luxury, it's a necessity. It ensures that data is high-quality, secure, private, and accessible for business value. A modern DG framework moves beyond rigid, compliance-only practices to become an enabler of data innovation.</p>
@@ -104,7 +104,7 @@ article: Article | undefined;
       title: 'Beyond Chatbots: Using AI for Hyper-Personalized Marketing',
       category: 'AI & Automation',
       summary: 'An essential guide...',
-      imageUrl: 'assets/blog-thumbnails/blogreporting.png',
+      imageUrl: 'assets/blog-thumbnails/blogreporting.webp',
       // Ensure the slug matches the URL path!
       slug: 'beyond-chatbots-using-ai-for-hyper-personalized-marketing', 
       fullContent: `<p>The conversation around Artificial Intelligence in marketing often begins and ends with automated customer service (chatbots). While these tools are valuable, they only scratch the surface of AI's potential. Today, advanced Machine Learning (ML) is fundamentally shifting how businesses connect with consumers, moving far past generic segmentation toward true hyper-personalization.</p>
@@ -125,7 +125,7 @@ article: Article | undefined;
       title: 'What we have been listening to in 2025',
       category: 'AI & Automation',
       summary: 'An essential guide...',
-      imageUrl: 'assets/blog-thumbnails/topofthepops.png',
+      imageUrl: 'assets/blog-thumbnails/topofthepops.webp',
       // Ensure the slug matches the URL path!
       slug: 'transforming-customer-onboarding-40-efficiency-gain', 
       fullContent: `<p>Here is a look at five essential podcasts dominating our playlists this year:</p>
@@ -174,7 +174,7 @@ article: Article | undefined;
       title: 'Roadmap to Digital Success in 2026',
       category: 'Digital Transformation',
       summary: 'An essential guide...',
-      imageUrl: 'assets/blog-thumbnails/neuralnetwork.png',
+      imageUrl: 'assets/blog-thumbnails/neuralnetwork.webp',
       // Ensure the slug matches the URL path!
       slug: 'roadmap-to-digital-success-in-2026', 
       fullContent: `
@@ -229,7 +229,7 @@ article: Article | undefined;
       title: 'AI Driven Quality in Month End Reporting',
       category: 'Case Studies',
       summary: 'An essential guide...',
-      imageUrl: 'assets/blog-thumbnails/blog_payments.png',
+      imageUrl: 'assets/blog-thumbnails/blog_payments.webp',
       // Ensure the slug matches the URL path!
       slug: 'ai-driven-quality-in-month-end-reporting', 
       fullContent: `<p class="text-lg"><strong>How improving data quality in delegated authority reporting unlocked new regulatory reporting capabilities and operational efficiency.</strong></p>
@@ -278,7 +278,7 @@ article: Article | undefined;
       title: 'The future of Price Comparision sites: Will AI take over?',
       category: 'AI & Automation',
       summary: 'How consumer purchasing habits in an AI-driven world are challenging comparison marketplaces.',
-      imageUrl: 'assets/blog-thumbnails/pcw_aifuture.png',
+      imageUrl: 'assets/blog-thumbnails/pcw_aifuture.webp',
       // Ensure the slug matches the URL path!
       slug: 'the-future-of-price-comparision-sites-will-ai-take-over', 
       fullContent: `<p class="text-lg"><strong>How shifting consumer purchasing habits in an AI-driven world are challenging the traditional advertising and operating models of comparison marketplaces.</strong></p>
