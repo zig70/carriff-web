@@ -48,7 +48,8 @@ jobs:
           context: .
           push: true
           # THE FIX: Construct the IMAGE NAME directly here using all env vars
-          tags: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          tags: europe-west1-docker.pkg.dev/carriffdigital/carriffdigital-web/carriff-angular-web:latest
+
           
       # --- Deploy to Cloud Run ---
       - name: 6. Deploy to Cloud Run
@@ -57,5 +58,5 @@ jobs:
           service: ${{ env.SERVICE_NAME }}
           region: ${{ env.REGION }}
           # THE FIX: Construct the IMAGE NAME directly here using all env vars
-          image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          image: europe-west1-docker.pkg.dev/carriffdigital/carriffdigital-web/carriff-angular-web:latest
           flags: "--allow-unauthenticated" 
