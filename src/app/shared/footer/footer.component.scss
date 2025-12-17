@@ -18,14 +18,25 @@
 }
 
 .footer-links, .footer-contact {
-  margin-bottom: 15px; /* Slightly less vertical separation on mobile */
+  margin-bottom: 15px; 
 }
 
-.footer-links h3, .footer-contact h3 {
+.footer-links h3 {
+  /* MOBILE SPECIFIC: Hide the title text */
+  display: none; 
+
+  /* Keep styling ready for desktop */
   color: color.adjust(var.$color-primary, $lightness:20%);
   margin-top: 0;
-  margin-bottom: 8px; /* Slightly reduced spacing */
-  font-size: 1.1em; /* Slightly smaller font for compactness */
+  margin-bottom: 8px; 
+  font-size: 1.1em; 
+}
+
+.footer-contact h3 {
+  color: color.adjust(var.$color-primary, $lightness:20%);
+  margin-top: 0;
+  margin-bottom: 8px; 
+  font-size: 1.1em; 
 }
 
 .footer-links ul {
@@ -70,8 +81,11 @@
     justify-content: flex-start;
   }
   
+  .footer-links h3 {
+    display: block; 
+  }
+  
   .footer-links {
-    /* Set up the links container to use flex */
     .footer-links ul {
       display: flex; /* Makes the list items horizontal */
       align-items: center;

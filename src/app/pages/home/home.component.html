@@ -1,14 +1,26 @@
-<section class="hero-section">
+<section class="hero-section" aria-labelledby="hero-heading">
   <img 
     ngSrc="assets/AutomationSimple1.webp" 
-    alt="Intelligent Automation Background"
+    alt="" 
     fill
     priority
     class="hero-background-img"
+    aria-hidden="true"
   >
 
+  <div class="hero-overlay"></div>
+
   <div class="hero-content">
-    <h1 class="hero-title">Furture-Proof Your Business with Intelligent Automation</h1>
-    <a routerLink="/contact" class="hero-cta-button">Join the Future</a>
+    <h1 id="hero-heading" class="hero-title">
+      Future-Proof Your Business with Intelligent Automation
+    </h1>
+
+    <a 
+      routerLink="/contact" 
+      class="hero-cta-button" 
+      aria-label="Contact us to join the future"
+    >
+      Join the Future
+    </a>
   </div>
 </section>

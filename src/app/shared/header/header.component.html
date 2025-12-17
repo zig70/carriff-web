@@ -1,6 +1,6 @@
 <header class="main-header">
   <div class="header-content">
-    <a routerLink="/" class="logo-link">
+    <a routerLink="/" class="logo-link" aria-label="Carriff Digital Home">
       <img ngSrc="assets/goat-logo.webp" 
         width="64" 
         height="60" 
@@ -9,11 +9,11 @@
       <span class="brand-name">Carriff Digital</span>
     </a>
 
-    <nav class="desktop-nav">
+    <nav class="desktop-nav" aria-label="Desktop Navigation">
       <ul>
-        <li class="has-dropdown">
+        <li class="has-dropdown" aria-haspopup="true">
           <a routerLink="/services">Services</a>
-          <ul class="submenu">
+          <ul class="submenu" aria-label="Services Submenu">
             <li><a routerLink="/dataservices">Data Services</a></li>
           </ul>
         </li>
@@ -23,17 +23,27 @@
       </ul>
     </nav>
 
-    <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+    <button 
+      class="mobile-menu-toggle" 
+      (click)="toggleMobileMenu()" 
+      aria-label="Toggle mobile menu"
+      [attr.aria-expanded]="isMobileMenuOpen"
+    >
       &#9776; 
     </button>
   </div>
 
-  <nav class="mobile-dropdown" [class.open]="isMobileMenuOpen">
+  <nav 
+    class="mobile-dropdown" 
+    [class.open]="isMobileMenuOpen" 
+    aria-label="Mobile Navigation"
+    [attr.aria-hidden]="!isMobileMenuOpen"
+  >
     <ul>
       <li><a routerLink="/services" (click)="closeMobileMenu()">Services</a></li>
       <ul class="mobile-submenu">
           <li><a routerLink="/dataservices" (click)="closeMobileMenu()">Data Services</a></li>
-        </ul>
+      </ul>
       <li><a routerLink="/blog" (click)="closeMobileMenu()">Blog</a></li>
       <li><a routerLink="/about" (click)="closeMobileMenu()">About</a></li>
       <li><a routerLink="/contact" class="mobile-contact-btn" (click)="closeMobileMenu()">Contact</a></li>

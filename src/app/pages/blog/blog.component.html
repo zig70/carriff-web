@@ -5,71 +5,80 @@
         <p>Stay ahead with insights into digital transformation, data governance best practices, and success stories from our clients.</p>
     </header>
 
-    <hr>
+    <hr aria-hidden="true">
 
-    <section class="category-filter">
+    <section class="category-filter" aria-label="Filter articles by category">
         <button 
           class="filter-btn" 
           [ngClass]="{'active': activeFilter === 'All Articles'}" 
+          [attr.aria-pressed]="activeFilter === 'All Articles'"
           (click)="filterArticles('All Articles')">
           All Articles
         </button>
         <button 
           class="filter-btn" 
           [ngClass]="{'active': activeFilter === 'Data Governance'}" 
+          [attr.aria-pressed]="activeFilter === 'Data Governance'"
           (click)="filterArticles('Data Governance')">
           Data Governance
         </button>
         <button 
           class="filter-btn" 
           [ngClass]="{'active': activeFilter === 'Digital Transformation'}" 
+          [attr.aria-pressed]="activeFilter === 'Digital Transformation'"
           (click)="filterArticles('Digital Transformation')">
           Digital Transformation
         </button>
         <button 
           class="filter-btn" 
           [ngClass]="{'active': activeFilter === 'Case Studies'}" 
+          [attr.aria-pressed]="activeFilter === 'Case Studies'"
           (click)="filterArticles('Case Studies')">
           Case Studies
         </button>
         <button 
           class="filter-btn" 
           [ngClass]="{'active': activeFilter === 'AI & Automation'}" 
+          [attr.aria-pressed]="activeFilter === 'AI & Automation'"
           (click)="filterArticles('AI & Automation')">
           AI & Automation
         </button>
     </section>
 
-    <section class="blog-grid">
-        
+    <section class="blog-grid" aria-label="Article List">
         
         @for (article of filteredArticles; track article; let i = $index) {
           <article class="blog-article blog-card">
             <div class="card-image">
                 <img 
                   [ngSrc]="article.imageUrl" 
-                  [alt]="article.title"
+                  alt="" 
+                  aria-hidden="true"
                   fill
                   class="article-thumbnail"
                   [priority]="i < 6"
                 >
-                </div>
+            </div>
             <div class="card-content">
                 <span class="category-tag">{{ article.category }}</span>
-                <h3>{{ article.title }}</h3>
+                
+                <h2>{{ article.title }}</h2>
+                
                 <p>{{ article.summary }}</p>
+                
                 <a 
                   [routerLink]="['/articles', getArticleSlug(article.title)]"
-                  class="read-more">
-                  Read {{ article.category === 'Case Studies' ? 'Full Story' : 'Article' }} →
+                  class="read-more"
+                  [attr.aria-label]="'Read ' + (article.category === 'Case Studies' ? 'Full Story' : 'Article') + ': ' + article.title"
+                >
+                  Read {{ article.category === 'Case Studies' ? 'Full Story' : 'Article' }} <span aria-hidden="true">→</span>
                 </a>
             </div>
         </article>
       }
         
-        
       @if (filteredArticles.length === 0) {
-        <div class="no-results">
+        <div class="no-results" role="alert">
             <p>No articles found for the selected category.</p>
         </div>
       }

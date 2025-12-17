@@ -1,6 +1,8 @@
 <main class="article-page-container">
     
-    <a routerLink="/blog" class="back-link">← Back to Knowledge Hub</a>
+    <a routerLink="/blog" class="back-link">
+        <span aria-hidden="true">←</span> Back to Knowledge Hub
+    </a>
 
     <header class="article-header">
         <span class="article-category">{{ article?.category }}</span>
@@ -11,23 +13,23 @@
     <figure class="article-image-container">
         <img 
             [ngSrc]="article?.imageUrl || ''" 
-            [alt]="article?.title" 
+            alt="" 
             width="700" 
             height="400" 
             priority
             class="article-hero-image"
+            aria-hidden="true"
         >
     </figure>
 
     <section class="article-content-body">
-        
         <div [innerHTML]="article?.fullContent"></div> 
-        
     </section>
 
-    <section class="article-cta">
-        <h2>Ready to Transform Your Data Strategy?</h2>
+    <section class="article-cta" aria-labelledby="cta-heading">
+        <h2 id="cta-heading">Ready to Transform Your Data Strategy?</h2>
         <p>Contact our experts today to schedule a free assessment of your current data governance framework.</p>
-        <button routerLink="/contact" class="cta-button">Speak to an Expert</button>
+        
+        <a routerLink="/contact" class="cta-button">Speak to an Expert</a>
     </section>
 </main>
