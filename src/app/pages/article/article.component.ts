@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { DOMPURIFY_TOKEN } from '../../providers/dompurify-token';
 import { SeoService } from './../../seo.service';
 
-    
+
 let domPurifyInstance: any = null;
 
 interface Article {
@@ -26,7 +26,7 @@ interface Article {
   imports: [RouterLink, NgOptimizedImage]
 })
 export class ArticleComponent implements OnInit {
-article: Article | undefined; 
+article: Article | undefined;
 
   // Inject ActivatedRoute into the constructor
   constructor(private route: ActivatedRoute,
@@ -34,7 +34,7 @@ article: Article | undefined;
     private seoService: SeoService,
   ) { }
 
- domPurifyInstance: any = inject(DOMPURIFY_TOKEN, { optional: true }) 
+ domPurifyInstance: any = inject(DOMPURIFY_TOKEN, { optional: true })
 
   ngOnInit(): void {
     // 1. Subscribe to changes in the URL parameters
@@ -54,7 +54,7 @@ article: Article | undefined;
       summary: 'An essential guide...',
       imageUrl: 'assets/blog-thumbnails/datagovblogimage.webp',
       // Ensure the slug matches the URL path!
-      slug: 'the-5-pillars-of-modern-data-governance-framework', 
+      slug: 'the-5-pillars-of-modern-data-governance-framework',
       fullContent: `<p>In today's data-intensive landscape, a robust Data Governance (DG) framework is no longer a luxury, it's a necessity. It ensures that data is high-quality, secure, private, and accessible for business value. A modern DG framework moves beyond rigid, compliance-only practices to become an enabler of data innovation.</p>
 
     <p>Here are the five essential pillars that form the foundation of a contemporary, effective Data Governance strategy:</p>
@@ -98,7 +98,7 @@ article: Article | undefined;
 
     <hr>
 
-    <p>A successful Data Governance framework integrates these five pillars to create a cohesive environment. It transforms governance from a restrictive checklist into a dynamic, value generating capability that empowers the business to make smarter, safer decisions.</p>` 
+    <p>A successful Data Governance framework integrates these five pillars to create a cohesive environment. It transforms governance from a restrictive checklist into a dynamic, value generating capability that empowers the business to make smarter, safer decisions.</p>`
     },
     {
       title: 'Beyond Chatbots: Using AI for Hyper-Personalized Marketing',
@@ -106,7 +106,7 @@ article: Article | undefined;
       summary: 'An essential guide...',
       imageUrl: 'assets/blog-thumbnails/blogreporting.webp',
       // Ensure the slug matches the URL path!
-      slug: 'beyond-chatbots-using-ai-for-hyper-personalized-marketing', 
+      slug: 'beyond-chatbots-using-ai-for-hyper-personalized-marketing',
       fullContent: `<p>The conversation around Artificial Intelligence in marketing often begins and ends with automated customer service (chatbots). While these tools are valuable, they only scratch the surface of AI's potential. Today, advanced Machine Learning (ML) is fundamentally shifting how businesses connect with consumers, moving far past generic segmentation toward true hyper-personalization.</p>
     <h3>The Power of Predictive Analytics</h3>
     <p>AI's real impact lies in its ability to process vast, disparate data sets to transaction histories, browsing behavior, social media engagement, and real-time location to create incredibly accurate customer profiles. This enables predictive modeling that forecasts individual customer needs and intent before the customer even knows it themselves.</p>
@@ -119,7 +119,7 @@ article: Article | undefined;
     <h3>Dynamic Content and Creative Optimization</h3>
     <p>Hyper-personalization is about more than just addressing a customer by name. It involves dynamic creative optimization, where every element of an advertisement, email, or website landing page is tailored in real-time. AI systems can automatically test thousands of variations of headlines, images, calls-to-action, and even background colors to find the optimal combination for each viewer. This level of granular customization drastically increases engagement and conversion rates, ensuring that the right message reaches the right person at the exact moment of need.</p>
     <h3>Scaling the One-to-One Experience</h3>
-    <p>The ultimate goal is to scale a "one-to-one" marketing experience across millions of customers simultaneously, a task impossible for human marketers. By moving beyond static automation and embracing the analytical and generative capabilities of modern AI, businesses can build deeper, more meaningful customer relationships that feel intuitive, timely, and genuine. This shift defines the future of customer experience.</p>` 
+    <p>The ultimate goal is to scale a "one-to-one" marketing experience across millions of customers simultaneously, a task impossible for human marketers. By moving beyond static automation and embracing the analytical and generative capabilities of modern AI, businesses can build deeper, more meaningful customer relationships that feel intuitive, timely, and genuine. This shift defines the future of customer experience.</p>`
     },
     {
       title: 'What we have been listening to in 2025',
@@ -127,7 +127,7 @@ article: Article | undefined;
       summary: 'An essential guide...',
       imageUrl: 'assets/blog-thumbnails/topofthepops.webp',
       // Ensure the slug matches the URL path!
-      slug: 'transforming-customer-onboarding-40-efficiency-gain', 
+      slug: 'what-we-have-been-listening-to-in-2025',
       fullContent: `<p>Here is a look at five essential podcasts dominating our playlists this year:</p>
 
     <div class="podcast-item">
@@ -168,7 +168,7 @@ article: Article | undefined;
         <div class="embed-container">
             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/show/5VZ8EozeEsAZCTej0zNT4P?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
-    </div>` 
+    </div>`
     },
     {
       title: 'Roadmap to Digital Success in 2026',
@@ -176,7 +176,7 @@ article: Article | undefined;
       summary: 'An essential guide...',
       imageUrl: 'assets/blog-thumbnails/neuralnetwork.webp',
       // Ensure the slug matches the URL path!
-      slug: 'roadmap-to-digital-success-in-2026', 
+      slug: 'roadmap-to-digital-success-in-2026',
       fullContent: `
         <p class="text-lg"><strong>Key strategic steps every business must take to accelerate digital maturity.</strong></p>
       <p>The pace of technological change shows no signs of slowing down. For businesses aiming to stay competitive in the coming year, a reactive stance is no longer sufficient. Digital transformation must be approached as a continuous journey guided by a clear, strategic roadmap. Successfully accelerating digital maturity by 2026 requires focused effort across three critical phases.</p>
@@ -223,7 +223,7 @@ article: Article | undefined;
     </ul>
 
     <p class="mt-8 text-lg">By following this three-phase roadmap, businesses can ensure their digital transformation efforts are not just technology upgrades, but strategic investments that secure competitive advantage and drive sustainable growth well into 2026 and beyond.</p>
-` 
+`
     },
     {
       title: 'AI Driven Quality in Month End Reporting',
@@ -231,15 +231,15 @@ article: Article | undefined;
       summary: 'An essential guide...',
       imageUrl: 'assets/blog-thumbnails/blog_payments.webp',
       // Ensure the slug matches the URL path!
-      slug: 'ai-driven-quality-in-month-end-reporting', 
+      slug: 'ai-driven-quality-in-month-end-reporting',
       fullContent: `<p class="text-lg"><strong>How improving data quality in delegated authority reporting unlocked new regulatory reporting capabilities and operational efficiency.</strong></p>
-  
+
     <p>In the delegated authority space, the accuracy of MonthEnd Bordereaux reports—detailed spreadsheets of premiums and claims shared between Managing General Agents (MGAs) and carriers is paramount. Historically, this has been an administrative nightmare, with compliance, reserving, and financial reporting resting on the integrity of often poorly structured data received via spreadsheets and Excel. This case study explores how intelligent automation transformed this critical process.</p>
 
     <h2>The Bordereaux Challenge: Manual Pain and Compliance Risk</h2>
 
     <p>The bordereaux process is plagued by a "garbage in, garbage out" problem. Carriers receive hundreds of reports monthly, each presenting unique data quality challenges:</p>
-    
+
     <ul class="step-list">
         <li><strong>Format and Mapping Inconsistencies:</strong> Every MGA uses a slightly different template, requiring extensive manual mapping and reconciliation before data can be ingested by core systems.</li>
         <li><strong>Delayed Reconciliation:</strong> Errors are often only caught weeks or months after submission, leading to inaccurate reserving and regulatory submissions.</li>
@@ -272,7 +272,7 @@ article: Article | undefined;
         <li><strong>Enhanced Partner Relations:</strong> The AI tool generated transparent, actionable data quality reports for MGAs, fostering collaborative improvement rather than punitive audits.</li>
     </ul>
 
-    <p class="mt-8 text-lg">By adopting AI to handle the heavy lifting of bordereaux data quality, the insurance carrier transformed a compliance burden into a competitive advantage, securing a trustworthy data foundation for reserving, reinsurance, and advanced risk modeling.</p>` 
+    <p class="mt-8 text-lg">By adopting AI to handle the heavy lifting of bordereaux data quality, the insurance carrier transformed a compliance burden into a competitive advantage, securing a trustworthy data foundation for reserving, reinsurance, and advanced risk modeling.</p>`
     },
     {
       title: 'The future of Price Comparision sites: Will AI take over?',
@@ -280,14 +280,14 @@ article: Article | undefined;
       summary: 'How consumer purchasing habits in an AI-driven world are challenging comparison marketplaces.',
       imageUrl: 'assets/blog-thumbnails/pcw_aifuture.webp',
       // Ensure the slug matches the URL path!
-      slug: 'the-future-of-price-comparision-sites-will-ai-take-over', 
+      slug: 'the-future-of-price-comparision-sites-will-ai-take-over',
       fullContent: `<p class="text-lg"><strong>How shifting consumer purchasing habits in an AI-driven world are challenging the traditional advertising and operating models of comparison marketplaces.</strong></p>
     <p>Price Comparison Websites (PCWs) revolutionized consumer purchasing by putting pricing power directly into the hands of the customer. However, in the age of Artificial Intelligence, this model faces an existential threat not just from competing technologies, but from fundamental shifts in how customers interact with brands and media. The question is no longer about better search algorithms, but whether the PCW model itself can survive the dual forces of AI suggestion and fractured attention.</p>
     <h2>The AI Recommendation Engine vs. The Trust Barrier</h2>
     <p>AI assistants and large language models (LLMs) are rapidly integrating into the purchase funnel. When a customer needs to buy complex products like car insurance or a mortgage, AI can now efficiently suggest optimal providers based on a deep, real-time understanding of the user's financial profile and risk appetite.</p>
     <ul class="step-list">
         <li>
-            <strong>AI's Suggestive Power:</strong> AI can compile and compare policy details faster than any PCW interface, presenting the "best" options in a conversational format tailored to the user's needs. 
+            <strong>AI's Suggestive Power:</strong> AI can compile and compare policy details faster than any PCW interface, presenting the "best" options in a conversational format tailored to the user's needs.
         </li>
         <li>
             <strong>The Trust Gap:</strong> Despite AI's efficiency, it cannot yet be trusted to choose for us, especially for high-stakes, legally binding products like insurance. The final responsibility for a policy's suitability rests with the individual.
@@ -323,30 +323,30 @@ article: Article | undefined;
     </ul>
 
     <p class="mt-8 text-lg">Ultimately, AI will not *take over* price comparison; it will transform it. PCWs that adapt to facilitate the inevitable human verification loop, while solving their distribution challenge in a fractured media landscape, will secure their place in the consumer's purchasing journey of the future.</p>
-` 
+`
     },
     // ... Add all your other articles here with unique slugs ...
   ];
   // -------------------------------------------------------------
 
   private platformId = inject(PLATFORM_ID);
-  
+
   // Method to get the sanitizer instance (Node-safe)
   getDomPurifyInstance() {
     // If running in the browser, use the global DOMPurify if it exists
     if (isPlatformBrowser(this.platformId) && (window as any).DOMPurify) {
         return (window as any).DOMPurify;
     }
-    
+
     // If running on the server, try to initialize the instance once
     if (!isPlatformBrowser(this.platformId) && !domPurifyInstance) {
         try {
 
         } catch (e) {
-           
+
         }
     }
-    
+
     // For this specific error, let's use the simplest SSR-safe solution:
     return domPurifyInstance; // or fallback to a standard sanitizer if needed
   }
@@ -356,8 +356,8 @@ article: Article | undefined;
    */
   fetchArticleData(slug: string): void {
     const foundArticle = this.mockArticles.find(a => this.formatSlug(a.title) === slug);
-    
-    
+
+
 if (foundArticle) {
     this.seoService.generateTags(foundArticle);
     let sanitizedHtmlString: string;
