@@ -15,6 +15,16 @@ const angularApp = new AngularNodeAppEngine();
 
 app.use(compression());
 
+app.use((req, res, next) => {
+  // Check if the request is HTTP (GCP usually passes this in x-forwarded-proto)
+  const proto = req.headers['x-forwarded-proto'];
+  if (proto === 'http') {
+    // Force a 301 Permanent Redirect to HTTPS
+    return res.redirect(301, `https://${req.headers.host}${req.url}`);
+  }
+  next();
+});
+
 app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
