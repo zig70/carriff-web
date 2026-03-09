@@ -1,0 +1,8 @@
+[
+  {
+    "origin": ["https://carriffdigital.com", "https://www.carriffdigital.com", "http://localhost:4200"],
+    "method": ["GET"],
+    "responseHeader": ["Content-Type"],
+    "maxAgeSeconds": 3600
+  }
+]

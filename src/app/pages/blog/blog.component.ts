@@ -4,60 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgClass, NgOptimizedImage } from '@angular/common';
 import { SeoService } from '../../seo.service';
+import { ArticleService, ArticleMeta } from '../../services/article.service';
 
-interface Article {
-  title: string;
-  category: 'All Articles' | 'Data Governance' | 'Digital Transformation' | 'Case Studies' | 'AI & Automation';
-  summary: string;
-  link: string;
-  imageUrl: string;
-}
-
-export const allArticles: Article[] = [
-    { 
-      title: 'What we have been listening to in 2025', 
-      category: 'Digital Transformation', 
-      summary: 'A little bit of help to breakdown the AI bubble.', 
-      link: '#',
-      imageUrl: 'assets/blog-thumbnails/topofthepops.webp'
-    },
-    { 
-      title: 'The future of Price Comparision sites: Will AI take over?', 
-      category: 'AI & Automation', 
-      summary: 'How consumer purchasing habits in an AI-driven world are challenging comparison marketplaces.', 
-      link: '#',
-      imageUrl: 'assets/blog-thumbnails/pcw_aifuture.webp'
-    },
-    { 
-      title: 'Beyond Chatbots: Using AI for Hyper-Personalized Marketing', 
-      category: 'AI & Automation', 
-      summary: 'Exploring advanced AI models for automating customer interactions and boosting conversion rates.', 
-      link: '#',
-      imageUrl: 'assets/blog-thumbnails/blogreporting.webp'
-    },
-    { 
-      title: 'Roadmap to Digital Success in 2026', 
-      category: 'Digital Transformation', 
-      summary: 'Key strategic steps every business must take to accelerate digital maturity.', 
-      link: '#',
-      imageUrl: 'assets/blog-thumbnails/neuralnetwork.webp'
-    },
-    { 
-      title: 'AI Driven Quality in Month End Reporting', 
-      category: 'Case Studies', 
-      summary: 'How improving data quality unlocked new regulatory reporting capabilities.', 
-      link: '#',
-      imageUrl: 'assets/blog-thumbnails/blog_payments.webp'
-    },
-    { 
-      title: 'The 5 Pillars of a Modern Data Governance Framework', 
-      category: 'Data Governance', 
-      summary: 'An essential guide to establishing trust and compliance across your enterprise data landscape.', 
-      link: '#',
-      imageUrl: 'assets/blog-thumbnails/datagovblogimage.webp'
-    },
-    // Add more articles here...
-  ];
+type CategoryFilter = 'All Articles' | 'Data Governance' | 'Digital Transformation' | 'Case Studies' | 'AI & Automation' | string;
 
 @Component({
   selector: 'app-blog',
@@ -67,33 +16,34 @@ export const allArticles: Article[] = [
   imports: [NgClass, RouterLink, NgOptimizedImage]
 })
 export class BlogComponent implements OnInit {
-  activeFilter: Article['category'] = 'All Articles';
+  activeFilter: CategoryFilter = 'All Articles';
 
-  allArticles = allArticles;
-  filteredArticles: Article[] = []; 
+  allArticles: ArticleMeta[] = [];
+  filteredArticles: ArticleMeta[] = [];
 
-  constructor(private seoService: SeoService) { }
+  constructor(
+    private seoService: SeoService,
+    private articleService: ArticleService,
+  ) {}
 
   ngOnInit(): void {
-    // This calls the filter logic on load to display all initial articles
-    this.filterArticles(this.activeFilter);
     this.seoService.setStaticTags({
       title: 'Blog',
       description: 'Sharing our thoughts at Carriff Digital.',
-      url: 'blog', // Just the path segment
-      //image: 'assets/social-share-about.jpg' // Optional social sharing image
+      url: 'blog',
+    });
+    this.articleService.getArticleList().subscribe(articles => {
+      this.allArticles = articles;
+      this.filterArticles(this.activeFilter);
     });
   }
 
-  // FIX C: Implement the complete filtering logic
-  filterArticles(category: Article['category']): void {
+  filterArticles(category: CategoryFilter): void {
     this.activeFilter = category;
 
     if (category === 'All Articles') {
-      // If 'All' is selected, show every article
       this.filteredArticles = [...this.allArticles];
     } else {
-      // Otherwise, filter the full list based on the category
       this.filteredArticles = this.allArticles.filter(article => article.category === category);
     }
   }

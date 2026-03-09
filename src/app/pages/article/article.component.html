@@ -10,12 +10,13 @@
         <p class="article-meta">Published by Carriff Digital</p>
     </header>
 
+    @if (article) {
     <figure class="article-image-container">
-        <img 
-            [ngSrc]="article?.imageUrl || ''" 
-            alt="" 
-            width="700" 
-            height="400" 
+        <img
+            [ngSrc]="article.imageUrl"
+            alt=""
+            width="700"
+            height="400"
             priority
             class="article-hero-image"
             aria-hidden="true"
@@ -23,8 +24,9 @@
     </figure>
 
     <section class="article-content-body">
-        <div [innerHTML]="article?.fullContent"></div> 
+        <div [innerHTML]="article.fullContent"></div>
     </section>
+    }
 
     <section class="article-cta" aria-labelledby="cta-heading">
         <h2 id="cta-heading">Ready to Transform Your Data Strategy?</h2>
