@@ -6,7 +6,7 @@ Angular 21 SSR website for Carriff Digital, a data & digital transformation cons
 ## Tech Stack
 - **Framework**: Angular 21 (standalone components, SSR via Angular Universal)
 - **Server**: Express.js 5 wrapping `AngularNodeAppEngine`
-- **Deployment**: Docker → GCP Artifact Registry → Cloud Run (region: europe-west2)
+- **Deployment**: Docker → GCP Artifact Registry → Cloud Run (region: europe-west1)
 - **CI/CD**: GitHub Actions with Workload Identity Federation (no long-lived SA keys)
 - **Node version**: 20 (builder) / 20-slim (runner)
 
@@ -74,7 +74,7 @@ All routes are set to `RenderMode.Prerender`. The `articles/:slug` route uses `g
 
 ### Deployment
 - Push to `main` → GitHub Actions → builds Docker image → pushes to Artifact Registry → deploys to Cloud Run
-- Image tag: `europe-west2-docker.pkg.dev/carriffdigital/carriffdigital-web/carriff-angular-web:latest`
+- Image tag: `europe-west1-docker.pkg.dev/carriffdigital/carriffdigital-web/carriff-angular-web:latest`
 - GCP auth uses Workload Identity Federation (secrets: `WIF_PROVIDER`, `GCP_SERVICE_ACCOUNT`, `GCP_PROJECT_ID`, `GCP_REGION`, `ARTIFACT_REGISTRY_REPO`)
 
 ## Development Conventions

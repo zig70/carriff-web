@@ -149,8 +149,8 @@ env:
 
 # Tag with both commit SHA and latest
 tags: |
-  europe-west2-docker.pkg.dev/.../carriff-angular-web:${{ github.sha }}
-  europe-west2-docker.pkg.dev/.../carriff-angular-web:latest
+  europe-west1-docker.pkg.dev/.../carriff-angular-web:${{ github.sha }}
+  europe-west1-docker.pkg.dev/.../carriff-angular-web:latest
 ```
 
 Then deploy using `${{ github.sha }}` tag. Rollback = redeploy previous SHA.

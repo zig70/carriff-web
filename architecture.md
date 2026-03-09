@@ -5,7 +5,7 @@
 A server-side rendered Angular 21 website deployed as a containerised Node.js service on Google Cloud Run. All routes are prerendered at build time (SSG), so Cloud Run primarily serves static HTML and handles dynamic requests with Angular Universal SSR as fallback.
 
 ```
-Browser ──HTTPS──► Cloud Run (europe-west2)
+Browser ──HTTPS──► Cloud Run (europe-west1)
                       │
                       ▼
                Express.js server
@@ -26,7 +26,7 @@ Browser ──HTTPS──► Cloud Run (europe-west2)
 | Component | Service | Notes |
 |-----------|---------|-------|
 | Hosting | GCP Cloud Run | Serverless containers, scales to zero |
-| Container registry | GCP Artifact Registry | `europe-west2-docker.pkg.dev` |
+| Container registry | GCP Artifact Registry | `europe-west1-docker.pkg.dev` |
 | CI/CD | GitHub Actions | Triggers on push to `main` |
 | Auth (CI→GCP) | Workload Identity Federation | No long-lived service account keys |
 
@@ -109,7 +109,7 @@ GitHub Actions (ubuntu-latest)
     │     ├── Stage 1: node:20 — npm ci + ng build --configuration production
     │     └── Stage 2: node:20-slim — copy /dist, npm ci --omit=dev
     ├── docker push → Artifact Registry (:latest tag)
-    └── gcloud run deploy → Cloud Run (europe-west2)
+    └── gcloud run deploy → Cloud Run (europe-west1)
 ```
 
 **Note**: The image is always tagged `:latest`. There is no versioned tagging, meaning rollbacks require manual intervention.
