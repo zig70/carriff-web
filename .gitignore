@@ -48,5 +48,7 @@ test-results/
 playwright-report/
 playwright/.cache/
 
-# Claude Code local settings (machine-specific paths)
+# Claude Code local settings and worktree scratch directories
 .claude/settings.local.json
+**/settings.local.json
+.claude/worktrees/
