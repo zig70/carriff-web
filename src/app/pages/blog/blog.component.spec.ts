@@ -76,26 +76,4 @@ describe('BlogComponent', () => {
     expect(component.allArticles.length).toBe(originalLength);
   });
 
-  describe('getArticleSlug', () => {
-    it('lowercases and hyphenates a simple title', () => {
-      expect(component.getArticleSlug('Hello World')).toBe('hello-world');
-    });
-
-    it('preserves numbers', () => {
-      expect(component.getArticleSlug('The 5 Pillars')).toBe('the-5-pillars');
-    });
-
-    it('strips special characters', () => {
-      expect(component.getArticleSlug('AI & Automation: A Guide')).toBe('ai-automation-a-guide');
-    });
-
-    it('collapses multiple whitespace into a single dash', () => {
-      expect(component.getArticleSlug('hello   world')).toBe('hello-world');
-    });
-
-    it('generates the correct slug for a real article title', () => {
-      const slug = component.getArticleSlug('What we have been listening to in 2025');
-      expect(slug).toBe('what-we-have-been-listening-to-in-2025');
-    });
-  });
 });

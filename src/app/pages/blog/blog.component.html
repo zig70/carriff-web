@@ -66,8 +66,8 @@
                 
                 <p>{{ article.summary }}</p>
                 
-                <a 
-                  [routerLink]="['/articles', getArticleSlug(article.title)]"
+                <a
+                  [routerLink]="['/articles', article.slug]"
                   class="read-more"
                   [attr.aria-label]="'Read ' + (article.category === 'Case Studies' ? 'Full Story' : 'Article') + ': ' + article.title"
                 >
