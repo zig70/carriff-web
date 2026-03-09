@@ -1,45 +1,19 @@
 import { ServerRoute, RenderMode } from '@angular/ssr';
-import { GCS_BASE } from './utils/constants';
-
-// Fallback used when GCS is unreachable at build time so the build never fails
-const FALLBACK_SLUGS = [
-  'what-we-have-been-listening-to-in-2026',
-  'what-we-have-been-listening-to-in-2025',
-  'the-future-of-price-comparision-sites-will-ai-take-over',
-  'beyond-chatbots-using-ai-for-hyper-personalized-marketing',
-  'roadmap-to-digital-success-in-2026',
-  'ai-driven-quality-in-month-end-reporting',
-  'the-5-pillars-of-a-modern-data-governance-framework',
-];
 
 export const serverRoutes: ServerRoute[] = [
-  {
-    path: 'articles/:slug',
-    renderMode: RenderMode.Prerender,
+  // Blog and article pages use Server rendering so Angular SSR waits for the
+  // GCS HttpClient fetch to complete before serialising HTML. Prerender was
+  // causing a race condition: native fetch() in withFetch() isn't tracked by
+  // Zone.js during the build-time prerender step, so Angular serialised the
+  // empty template before the GCS response arrived.
+  { path: 'articles/:slug', renderMode: RenderMode.Server },
+  { path: 'blog', renderMode: RenderMode.Server },
 
-    // Fetches slug list from GCS at build time to generate static pages.
-    // Falls back to a hardcoded list if GCS is unreachable so the build never fails.
-    async getPrerenderParams() {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 10_000);
-      try {
-        const res = await fetch(`${GCS_BASE}/articles/index.json`, { signal: controller.signal });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const articles: { slug: string }[] = await res.json();
-        return articles.map(a => ({ slug: a.slug }));
-      } catch (e) {
-        console.warn('[SSR] GCS index.json unavailable, falling back to hardcoded slugs:', e);
-        return FALLBACK_SLUGS.map(slug => ({ slug }));
-      } finally {
-        clearTimeout(timeout);
-      }
-    },
-  },
+  // Static/marketing pages have no async data — prerender them at build time.
   { path: '', renderMode: RenderMode.Prerender },
-  { path: 'blog', renderMode: RenderMode.Prerender },
   { path: 'services', renderMode: RenderMode.Prerender },
   { path: 'dataservices', renderMode: RenderMode.Prerender },
   { path: 'about', renderMode: RenderMode.Prerender },
   { path: 'contact', renderMode: RenderMode.Prerender },
-  { path: '**', renderMode: RenderMode.Prerender }
+  { path: '**', renderMode: RenderMode.Prerender },
 ];
