@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy package files first for caching
 COPY package*.json ./
 
+# Upgrade npm to match packageManager field in package.json (node:20 ships with npm@10)
+RUN npm install -g npm@$(node -e "const p=require('./package.json'); console.log(p.packageManager.split('@')[1])")
+
 # Install dependencies
 RUN npm ci
 

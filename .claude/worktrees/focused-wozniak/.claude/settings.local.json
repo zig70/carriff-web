@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const l = require\\(''./package-lock.json''\\); console.log\\(''lockfileVersion:'', l.lockfileVersion\\); console.log\\(''npm used to generate \\(from packages[\"\"\"\"]\\):'', JSON.stringify\\(l.packages?.['''']?.engines ?? ''not set''\\)\\)\")",
+      "Bash(docker run --rm node:20 npm --version)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''packages count:'', len\\(d.get\\(''packages'',{}\\)\\)\\)\")",
+      "Bash(node -e \"const l=require\\(''./package-lock.json''\\); console.log\\(''packages count:'', Object.keys\\(l.packages||{}\\).length\\)\")"
+    ]
+  }
+}
