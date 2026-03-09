@@ -1,8 +1,10 @@
-import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
+import { Subject, EMPTY } from 'rxjs';
+import { switchMap, filter, takeUntil, catchError } from 'rxjs/operators';
 import { DOMPURIFY_TOKEN } from '../../providers/dompurify-token';
 import { SeoService } from './../../seo.service';
 import { ArticleService, Article } from '../../services/article.service';
@@ -16,10 +18,12 @@ interface ArticleDisplay extends Omit<Article, 'fullContent'> {
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss'],
   standalone: true,
-  imports: [RouterLink, NgOptimizedImage]
+  imports: [RouterLink, NgOptimizedImage],
 })
-export class ArticleComponent implements OnInit {
+export class ArticleComponent implements OnInit, OnDestroy {
   article: ArticleDisplay | undefined;
+
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
@@ -33,36 +37,38 @@ export class ArticleComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const slug = params.get('slug');
-      if (slug) {
-        this.fetchArticleData(slug);
-      }
-    });
-  }
-
-  fetchArticleData(slug: string): void {
-    this.articleService.getArticle(slug).subscribe({
-      next: (foundArticle) => {
+    this.route.paramMap
+      .pipe(
+        filter(params => !!params.get('slug')),
+        switchMap(params =>
+          this.articleService.getArticle(params.get('slug')!).pipe(
+            catchError(err => {
+              console.error('Article not found:', err);
+              return EMPTY;
+            }),
+          ),
+        ),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(foundArticle => {
         this.seoService.generateTags(foundArticle);
-        let sanitizedHtmlString: string;
 
-        if (isPlatformBrowser(this.platformId)) {
-          if ((window as any).DOMPurify) {
-            sanitizedHtmlString = (window as any).DOMPurify.sanitize(foundArticle.fullContent);
-          } else {
-            sanitizedHtmlString = foundArticle.fullContent;
-          }
+        let sanitizedHtmlString: string;
+        if (isPlatformBrowser(this.platformId) && (window as any).DOMPurify) {
+          sanitizedHtmlString = (window as any).DOMPurify.sanitize(foundArticle.fullContent);
         } else {
           sanitizedHtmlString = foundArticle.fullContent;
         }
 
-        const safeContent = this.sanitizer.bypassSecurityTrustHtml(sanitizedHtmlString);
-        this.article = { ...foundArticle, fullContent: safeContent };
-      },
-      error: (err) => {
-        console.error('Article not found for slug:', slug, err);
-      }
-    });
+        this.article = {
+          ...foundArticle,
+          fullContent: this.sanitizer.bypassSecurityTrustHtml(sanitizedHtmlString),
+        };
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

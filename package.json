@@ -12,7 +12,7 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug",
     "serve:ssr:carriff-web": "node dist/carriff-web/server/server.mjs",
-    "dev:ssr": "ng serve --ssr",
+    "dev:ssr": "ng serve",
     "serve:ssr": "ng build --configuration production && node dist/carriff-web/server/server.mjs",
     "build:ssr": "ng build --configuration production",
     "prerender": "ng run carriff-web:prerender"

@@ -7,7 +7,7 @@ test.describe('Blog page', () => {
 
   test('displays articles on load', async ({ page }) => {
     const articles = page.locator('article.blog-card');
-    await expect(articles).toHaveCount(6); // Total articles currently in mock data
+    await expect(articles).toHaveCount(7); // Total articles in index.json
   });
 
   test('category filter buttons are present', async ({ page }) => {
@@ -24,7 +24,7 @@ test.describe('Blog page', () => {
     const articles = page.locator('article.blog-card');
     const count = await articles.count();
     expect(count).toBeGreaterThan(0);
-    expect(count).toBeLessThan(6);
+    expect(count).toBeLessThan(7);
   });
 
   test('filtered articles all belong to selected category', async ({ page }) => {
@@ -39,7 +39,7 @@ test.describe('Blog page', () => {
   test('switching back to All Articles shows all cards', async ({ page }) => {
     await page.click('button.filter-btn:has-text("AI & Automation")');
     await page.click('button.filter-btn:has-text("All Articles")');
-    await expect(page.locator('article.blog-card')).toHaveCount(6);
+    await expect(page.locator('article.blog-card')).toHaveCount(7);
   });
 
   test('active filter button changes on click', async ({ page }) => {
@@ -51,7 +51,7 @@ test.describe('Blog page', () => {
   test('each article card has a "Read Article" link', async ({ page }) => {
     const links = page.locator('article.blog-card a.read-more');
     const count = await links.count();
-    expect(count).toBe(6);
+    expect(count).toBe(7);
     for (let i = 0; i < count; i++) {
       const href = await links.nth(i).getAttribute('href');
       expect(href).toMatch(/\/articles\/.+/);
