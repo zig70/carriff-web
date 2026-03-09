@@ -1,9 +1,7 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
-import { of } from 'rxjs';
+import { provideRouter, ActivatedRoute } from '@angular/router';
 import { BlogComponent } from './blog.component';
 import { SeoService } from '../../seo.service';
-import { ArticleService } from '../../services/article.service';
 
 const mockArticles = [
   { slug: 'article-1', title: 'Article One', category: 'Data Governance', summary: 'Summary 1', imageUrl: 'img1.webp', publishedAt: '2025-01-01' },
@@ -24,7 +22,8 @@ describe('BlogComponent', () => {
       providers: [
         provideRouter([]),
         { provide: SeoService, useValue: { setStaticTags: vi.fn(), generateTags: vi.fn() } },
-        { provide: ArticleService, useValue: { getArticleList: vi.fn().mockReturnValue(of(mockArticles)) } },
+        // blogResolver pre-fetches articles; tests simulate the resolved route data.
+        { provide: ActivatedRoute, useValue: { snapshot: { data: { articles: mockArticles } } } },
       ],
     }).compileComponents();
 
@@ -75,5 +74,4 @@ describe('BlogComponent', () => {
     component.filterArticles('Data Governance');
     expect(component.allArticles.length).toBe(originalLength);
   });
-
 });

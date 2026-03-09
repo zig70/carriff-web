@@ -1,10 +1,10 @@
 // src/app/blog/blog.component.ts
 
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, ActivatedRoute } from '@angular/router';
 import { NgClass, NgOptimizedImage } from '@angular/common';
 import { SeoService } from '../../seo.service';
-import { ArticleService, ArticleMeta } from '../../services/article.service';
+import { ArticleMeta } from '../../services/article.service';
 
 type CategoryFilter = 'All Articles' | 'Data Governance' | 'Digital Transformation' | 'Case Studies' | 'AI & Automation';
 
@@ -13,7 +13,7 @@ type CategoryFilter = 'All Articles' | 'Data Governance' | 'Digital Transformati
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.scss'],
   standalone: true,
-  imports: [NgClass, RouterLink, NgOptimizedImage]
+  imports: [NgClass, RouterLink, NgOptimizedImage],
 })
 export class BlogComponent implements OnInit {
   activeFilter: CategoryFilter = 'All Articles';
@@ -23,7 +23,7 @@ export class BlogComponent implements OnInit {
 
   constructor(
     private seoService: SeoService,
-    private articleService: ArticleService,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -32,13 +32,10 @@ export class BlogComponent implements OnInit {
       description: 'Sharing our thoughts at Carriff Digital.',
       url: 'blog',
     });
-    this.articleService.getArticleList().subscribe({
-      next: articles => {
-        this.allArticles = articles;
-        this.filterArticles(this.activeFilter);
-      },
-      error: err => console.error('[Blog] Failed to load article list:', err),
-    });
+    // Articles are pre-fetched by blogResolver before this component activates —
+    // synchronous read, works for both SSR and client-side navigation.
+    this.allArticles = this.route.snapshot.data['articles'] ?? [];
+    this.filterArticles(this.activeFilter);
   }
 
   filterArticles(category: CategoryFilter): void {
@@ -50,5 +47,4 @@ export class BlogComponent implements OnInit {
       this.filteredArticles = this.allArticles.filter(article => article.category === category);
     }
   }
-
 }
