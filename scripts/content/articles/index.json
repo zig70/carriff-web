@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "what-we-have-been-listening-to-in-2025",
+    "title": "What we have been listening to in 2025",
+    "category": "Digital Transformation",
+    "summary": "A little bit of help to breakdown the AI bubble.",
+    "imageUrl": "assets/blog-thumbnails/topofthepops.webp",
+    "publishedAt": "2025-01-01"
+  },
+  {
+    "slug": "the-future-of-price-comparision-sites-will-ai-take-over",
+    "title": "The future of Price Comparision sites: Will AI take over?",
+    "category": "AI & Automation",
+    "summary": "How consumer purchasing habits in an AI-driven world are challenging comparison marketplaces.",
+    "imageUrl": "assets/blog-thumbnails/pcw_aifuture.webp",
+    "publishedAt": "2025-11-01"
+  },
+  {
+    "slug": "beyond-chatbots-using-ai-for-hyper-personalized-marketing",
+    "title": "Beyond Chatbots: Using AI for Hyper-Personalized Marketing",
+    "category": "AI & Automation",
+    "summary": "Exploring advanced AI models for automating customer interactions and boosting conversion rates.",
+    "imageUrl": "assets/blog-thumbnails/blogreporting.webp",
+    "publishedAt": "2025-03-01"
+  },
+  {
+    "slug": "roadmap-to-digital-success-in-2026",
+    "title": "Roadmap to Digital Success in 2026",
+    "category": "Digital Transformation",
+    "summary": "Key strategic steps every business must take to accelerate digital maturity.",
+    "imageUrl": "assets/blog-thumbnails/neuralnetwork.webp",
+    "publishedAt": "2025-06-01"
+  },
+  {
+    "slug": "ai-driven-quality-in-month-end-reporting",
+    "title": "AI Driven Quality in Month End Reporting",
+    "category": "Case Studies",
+    "summary": "How improving data quality unlocked new regulatory reporting capabilities.",
+    "imageUrl": "assets/blog-thumbnails/blog_payments.webp",
+    "publishedAt": "2025-09-01"
+  },
+  {
+    "slug": "the-5-pillars-of-a-modern-data-governance-framework",
+    "title": "The 5 Pillars of a Modern Data Governance Framework",
+    "category": "Data Governance",
+    "summary": "An essential guide to establishing trust and compliance across your enterprise data landscape.",
+    "imageUrl": "assets/blog-thumbnails/datagovblogimage.webp",
+    "publishedAt": "2025-01-01"
+  }
+]

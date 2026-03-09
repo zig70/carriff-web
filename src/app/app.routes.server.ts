@@ -1,26 +1,39 @@
 import { ServerRoute, RenderMode } from '@angular/ssr';
-import { allArticles } from './pages/blog/blog.component'; // Data source
 
-function getArticleSlug(title: string): string {
-    return title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
-}
+const GCS_BASE = 'https://storage.googleapis.com/carriffdigital-content';
+
+// Fallback used when GCS is unreachable at build time so the build never fails
+const FALLBACK_SLUGS = [
+  'what-we-have-been-listening-to-in-2025',
+  'the-future-of-price-comparision-sites-will-ai-take-over',
+  'beyond-chatbots-using-ai-for-hyper-personalized-marketing',
+  'roadmap-to-digital-success-in-2026',
+  'ai-driven-quality-in-month-end-reporting',
+  'the-5-pillars-of-a-modern-data-governance-framework',
+];
 
 export const serverRoutes: ServerRoute[] = [
   {
     path: 'articles/:slug',
-    renderMode: RenderMode.Prerender, // We want these pages to be static (SSG)
-    
-    // This function runs at build time to tell the compiler which slugs to use
+    renderMode: RenderMode.Prerender,
+
+    // Fetches slug list from GCS at build time to generate static pages.
+    // Falls back to a hardcoded list if GCS is unreachable so the build never fails.
     async getPrerenderParams() {
-      // Use the exported allArticles data
-      const params = allArticles.map(article => ({
-        slug: getArticleSlug(article.title)
-      }));
-      
-      return params; // Returns [{ slug: 'what-we-have-been-listening-to-in-2025' }, ...]
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10_000);
+        const res = await fetch(`${GCS_BASE}/articles/index.json`, { signal: controller.signal });
+        clearTimeout(timeout);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const articles: { slug: string }[] = await res.json();
+        return articles.map(a => ({ slug: a.slug }));
+      } catch (e) {
+        console.warn('[SSR] GCS index.json unavailable, falling back to hardcoded slugs:', e);
+        return FALLBACK_SLUGS.map(slug => ({ slug }));
+      }
     },
   },
-  // Optionally, you can set other static routes to prerender here
   { path: '', renderMode: RenderMode.Prerender },
   { path: 'blog', renderMode: RenderMode.Prerender },
   { path: 'services', renderMode: RenderMode.Prerender },
