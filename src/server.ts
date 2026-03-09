@@ -22,11 +22,15 @@ app.use(
       directives: {
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", "'unsafe-inline'"],
-        styleSrc: ["'self'", "'unsafe-inline'"],
+        // Helmet defaults script-src-attr to 'none', which blocks Angular's
+        // event replay inline event handlers and prevents the app initialising.
+        // Match scriptSrc so Angular hydration/event-replay works correctly.
+        scriptSrcAttr: ["'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
         imgSrc: ["'self'", 'data:', 'https://storage.googleapis.com'],
         frameSrc: ['https://open.spotify.com'],
         connectSrc: ["'self'", 'https://storage.googleapis.com'],
-        fontSrc: ["'self'"],
+        fontSrc: ["'self'", 'https://fonts.gstatic.com'],
       },
     },
     // Required: Spotify iframes set cross-origin headers that COEP blocks
