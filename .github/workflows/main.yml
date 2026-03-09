@@ -109,6 +109,16 @@ jobs:
             ${{ env.IMAGE_BASE }}:${{ github.sha }}
             ${{ env.IMAGE_BASE }}:latest
 
+      # Apply GCS CORS policy so browser requests from any origin (Cloud Run URL,
+      # custom domain, localhost) can reach the public content bucket.
+      # continue-on-error: the SA needs roles/storage.admin on the bucket;
+      # if not yet granted this logs a warning but does not block the deploy.
+      - name: 6b. Apply GCS CORS policy
+        continue-on-error: true
+        run: |
+          gcloud storage buckets update gs://carriffdigital-content \
+            --cors-file=scripts/cors.json
+
       # Deploy SHA-tagged image — rollback = redeploy a previous SHA
       - name: 7. Deploy to Cloud Run
         id: deploy
