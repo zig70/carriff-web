@@ -1,6 +1,6 @@
 [
   {
-    "origin": ["https://carriffdigital.com", "https://www.carriffdigital.com"],
+    "origin": ["*"],
     "method": ["GET"],
     "responseHeader": ["Content-Type"],
     "maxAgeSeconds": 3600
