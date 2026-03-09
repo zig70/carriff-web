@@ -12,8 +12,8 @@ Angular 21 SSR website for Carriff Digital, a data & digital transformation cons
 
 ## Key Commands
 ```bash
-npm run start          # Local dev server (no SSR)
-npm run dev:ssr        # Local dev with SSR
+npm run start          # Local dev server (SSR auto-enabled by Angular 21 — same as dev:ssr)
+npm run dev:ssr        # Local dev server (alias for start; --ssr flag removed, Angular 21 detects SSR automatically)
 npm run build:ssr      # Production build
 npm run serve:ssr      # Build + serve production locally
 npm run prerender      # Prerender all static routes

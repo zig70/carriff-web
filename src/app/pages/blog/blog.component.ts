@@ -6,7 +6,7 @@ import { NgClass, NgOptimizedImage } from '@angular/common';
 import { SeoService } from '../../seo.service';
 import { ArticleService, ArticleMeta } from '../../services/article.service';
 
-type CategoryFilter = 'All Articles' | 'Data Governance' | 'Digital Transformation' | 'Case Studies' | 'AI & Automation' | string;
+type CategoryFilter = 'All Articles' | 'Data Governance' | 'Digital Transformation' | 'Case Studies' | 'AI & Automation';
 
 @Component({
   selector: 'app-blog',
