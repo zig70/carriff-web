@@ -1,5 +1,5 @@
-import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
@@ -28,9 +28,7 @@ export class ArticleComponent implements OnInit {
     private articleService: ArticleService,
   ) {}
 
-  domPurifyInstance: any = inject(DOMPURIFY_TOKEN, { optional: true });
-
-  private platformId = inject(PLATFORM_ID);
+  private domPurifyInstance: any = inject(DOMPURIFY_TOKEN, { optional: true });
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -47,12 +45,10 @@ export class ArticleComponent implements OnInit {
         this.seoService.generateTags(foundArticle);
         let sanitizedHtmlString: string;
 
-        if (isPlatformBrowser(this.platformId)) {
-          if ((window as any).DOMPurify) {
-            sanitizedHtmlString = (window as any).DOMPurify.sanitize(foundArticle.fullContent);
-          } else {
-            sanitizedHtmlString = foundArticle.fullContent;
-          }
+        if (this.domPurifyInstance) {
+          sanitizedHtmlString = this.domPurifyInstance.sanitize(foundArticle.fullContent);
+        } else if (typeof window !== 'undefined' && (window as any).DOMPurify) {
+          sanitizedHtmlString = (window as any).DOMPurify.sanitize(foundArticle.fullContent);
         } else {
           sanitizedHtmlString = foundArticle.fullContent;
         }
