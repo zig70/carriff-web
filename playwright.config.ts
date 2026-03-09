@@ -1,5 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// When PRODUCTION_URL is set (smoke tests in CI), hit the live service directly
+// and skip starting a local dev server.
+const productionUrl = process.env['PRODUCTION_URL'];
+
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
@@ -9,7 +13,7 @@ export default defineConfig({
   reporter: process.env['CI'] ? 'github' : 'html',
 
   use: {
-    baseURL: 'http://localhost:4200',
+    baseURL: productionUrl ?? 'http://localhost:4200',
     trace: 'on-first-retry',
   },
 
@@ -20,10 +24,13 @@ export default defineConfig({
     },
   ],
 
-  webServer: {
-    command: 'npm run start',
-    url: 'http://localhost:4200',
-    reuseExistingServer: !process.env['CI'],
-    timeout: 120 * 1000,
-  },
+  // Skip the dev server when running smoke tests against a live deployment
+  webServer: productionUrl
+    ? undefined
+    : {
+        command: 'npm run start',
+        url: 'http://localhost:4200',
+        reuseExistingServer: !process.env['CI'],
+        timeout: 120 * 1000,
+      },
 });

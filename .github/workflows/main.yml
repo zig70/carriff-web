@@ -3,10 +3,9 @@ name: Deploy Angular to Cloud Run via GitHub Actions
 on:
   push:
     branches:
-      - main  # Trigger deployment only on pushes to the main branch
+      - main
 
 env:
-  # GCP Environment Variables (from GitHub Secrets)
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   REGION: ${{ secrets.GCP_REGION }}
   GCP_SA_EMAIL: ${{ secrets.GCP_SERVICE_ACCOUNT }}
@@ -15,19 +14,44 @@ env:
   IMAGE_BASE: europe-west2-docker.pkg.dev/carriffdigital/carriffdigital-web/carriff-angular-web
 
 jobs:
-  deploy:
+  # -----------------------------------------------------------------------
+  # Job 1: Unit tests — run first, block deploy if they fail
+  # -----------------------------------------------------------------------
+  unit-test:
+    name: Unit Tests
     runs-on: ubuntu-latest
-
-    # Permissions required for Workload Identity Federation (WIF)
-    permissions:
-      contents: 'read'
-      id-token: 'write' # Required to fetch the OIDC token for GCP authentication
-
     steps:
-      - name: 1. Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # --- Authentication Step (using WIF) ---
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Vitest unit tests
+        run: npm test
+
+  # -----------------------------------------------------------------------
+  # Job 2: Build → Deploy → Smoke test → Rollback on failure
+  # -----------------------------------------------------------------------
+  deploy:
+    name: Build, Deploy & Smoke Test
+    needs: unit-test
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: 1. Checkout code
+        uses: actions/checkout@v4
+
       - name: 2. Authenticate to Google Cloud
         id: auth
         uses: 'google-github-actions/auth@v2'
@@ -35,15 +59,25 @@ jobs:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ env.GCP_SA_EMAIL }}
 
-      - name: 3. Set up Docker Buildx
+      # Snapshot the currently-deployed image so we can roll back to it
+      # if smoke tests fail after this deploy.
+      - name: 3. Capture current image for rollback
+        id: current
+        run: |
+          IMAGE=$(gcloud run services describe ${{ env.SERVICE_NAME }} \
+            --region=${{ env.REGION }} \
+            --format='value(spec.template.spec.containers[0].image)' 2>/dev/null || echo "")
+          echo "image=${IMAGE}" >> $GITHUB_OUTPUT
+          echo "Rollback target: ${IMAGE:-none}"
+
+      - name: 4. Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: 4. Configure Docker for Artifact Registry
+      - name: 5. Configure Docker for Artifact Registry
         run: gcloud auth configure-docker europe-west2-docker.pkg.dev
 
-      # --- Build and Push Container Image ---
-      # Tagged with both the commit SHA (for rollbacks) and latest
-      - name: 5. Build and Push Docker Image
+      # Tag with commit SHA (for rollbacks) and :latest
+      - name: 6. Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -52,12 +86,42 @@ jobs:
             ${{ env.IMAGE_BASE }}:${{ github.sha }}
             ${{ env.IMAGE_BASE }}:latest
 
-      # --- Deploy to Cloud Run ---
-      # Deploy the SHA-tagged image so rollback = redeploy a previous SHA
-      - name: 6. Deploy to Cloud Run
+      # Deploy SHA-tagged image — rollback = redeploy a previous SHA
+      - name: 7. Deploy to Cloud Run
+        id: deploy
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.SERVICE_NAME }}
           region: ${{ env.REGION }}
           image: ${{ env.IMAGE_BASE }}:${{ github.sha }}
-          flags: "--allow-unauthenticated"
+          flags: '--allow-unauthenticated'
+
+      - name: 8. Set up Node.js for smoke tests
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 9. Install dependencies
+        run: npm ci
+
+      - name: 10. Install Playwright browser
+        run: npx playwright install chromium --with-deps
+
+      # Run smoke.spec.ts directly against the live Cloud Run URL.
+      # PRODUCTION_URL tells playwright.config.ts to skip the dev server.
+      - name: 11. Run smoke tests against production
+        id: smoke
+        run: npx playwright test e2e/smoke.spec.ts
+        env:
+          PRODUCTION_URL: ${{ steps.deploy.outputs.url }}
+
+      # If smoke tests failed after a successful deploy, restore the previous image.
+      # Skipped if there was no previous deployment to roll back to.
+      - name: 12. Rollback on smoke test failure
+        if: failure() && steps.smoke.conclusion == 'failure' && steps.current.outputs.image != ''
+        run: |
+          echo "::warning::Smoke tests failed — rolling back to ${{ steps.current.outputs.image }}"
+          gcloud run services update ${{ env.SERVICE_NAME }} \
+            --region=${{ env.REGION }} \
+            --image=${{ steps.current.outputs.image }}
