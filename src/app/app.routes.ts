@@ -1,21 +1,37 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component'; 
-import { ServicesComponent } from './pages/services/services.component';
-import { DataservicesComponent } from './pages/dataservices/dataservices.component';
-import { ArticleComponent } from './pages/article/article.component';
-import { BlogComponent } from './pages/blog/blog.component';
-import { AboutComponent } from './pages/about/about.component';
-import { ContactComponent } from './pages/contact/contact.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent }, 
-  { path: 'services', component: ServicesComponent },
-  { path: 'dataservices', component: DataservicesComponent },
-  { path: 'articles/:slug', component: ArticleComponent },
-  { path: 'blog', component: BlogComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, 
-  { path: '**', component: NotFoundComponent } 
+  {
+    path: '',
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
+  },
+  {
+    path: 'services',
+    loadComponent: () => import('./pages/services/services.component').then(m => m.ServicesComponent),
+  },
+  {
+    path: 'dataservices',
+    loadComponent: () => import('./pages/dataservices/dataservices.component').then(m => m.DataservicesComponent),
+  },
+  {
+    path: 'articles/:slug',
+    loadComponent: () => import('./pages/article/article.component').then(m => m.ArticleComponent),
+  },
+  {
+    path: 'blog',
+    loadComponent: () => import('./pages/blog/blog.component').then(m => m.BlogComponent),
+  },
+  {
+    path: 'about',
+    loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent),
+  },
+  {
+    path: 'contact',
+    loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent),
+  },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  {
+    path: '**',
+    loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent),
+  },
 ];

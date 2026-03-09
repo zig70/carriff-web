@@ -44,6 +44,7 @@
     "compression": "^1.8.1",
     "dompurify": "^3.3.0",
     "express": "^5.1.0",
+    "helmet": "^8.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -51,14 +52,15 @@
     "@angular/build": "^21.0.0",
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
+    "@playwright/test": "^1.58.2",
     "@types/compression": "^1.8.1",
     "@types/express": "^5.0.1",
+    "@types/helmet": "^0.0.48",
     "@types/jsdom": "^27.0.0",
     "@types/node": "^20.17.19",
     "jsdom": "^27.1.0",
     "sharp": "^0.34.5",
     "typescript": "~5.9.2",
-    "vitest": "^4.0.8",
-    "@playwright/test": "^1.58.2"
+    "vitest": "^4.0.8"
   }
 }

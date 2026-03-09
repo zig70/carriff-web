@@ -7,6 +7,7 @@ import {
 import express from 'express';
 import { join } from 'node:path';
 import compression from 'compression';
+import helmet from 'helmet';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -14,6 +15,24 @@ const app = express();
 const angularApp = new AngularNodeAppEngine();
 
 app.use(compression());
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", 'data:', 'https://storage.googleapis.com'],
+        frameSrc: ['https://open.spotify.com'],
+        connectSrc: ["'self'", 'https://storage.googleapis.com'],
+        fontSrc: ["'self'"],
+      },
+    },
+    // Required: Spotify iframes set cross-origin headers that COEP blocks
+    crossOriginEmbedderPolicy: false,
+  }),
+);
 
 app.use((req, res, next) => {
   // Check if the request is HTTP (GCP usually passes this in x-forwarded-proto)
