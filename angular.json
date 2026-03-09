@@ -53,7 +53,8 @@
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
-            }
+            },
+            "externalDependencies": ["jsdom"]
           },
           "configurations": {
             "production": {
