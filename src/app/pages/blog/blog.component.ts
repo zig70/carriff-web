@@ -32,9 +32,12 @@ export class BlogComponent implements OnInit {
       description: 'Sharing our thoughts at Carriff Digital.',
       url: 'blog',
     });
-    this.articleService.getArticleList().subscribe(articles => {
-      this.allArticles = articles;
-      this.filterArticles(this.activeFilter);
+    this.articleService.getArticleList().subscribe({
+      next: articles => {
+        this.allArticles = articles;
+        this.filterArticles(this.activeFilter);
+      },
+      error: err => console.error('[Blog] Failed to load article list:', err),
     });
   }
 
