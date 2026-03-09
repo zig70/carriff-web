@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { GCS_BASE } from '../utils/constants';
 
 export interface ArticleMeta {
   slug: string;
@@ -15,8 +16,6 @@ export interface ArticleMeta {
 export interface Article extends ArticleMeta {
   fullContent: string;
 }
-
-const GCS_BASE = 'https://storage.googleapis.com/carriffdigital-content';
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {
