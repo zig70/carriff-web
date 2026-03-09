@@ -15,7 +15,7 @@ env:
 
 jobs:
   # -----------------------------------------------------------------------
-  # Job 1: Unit tests — run first, block deploy if they fail
+  # Job 1a: Unit tests — run in parallel with build-check
   # -----------------------------------------------------------------------
   unit-test:
     name: Unit Tests
@@ -37,11 +37,34 @@ jobs:
         run: npm test
 
   # -----------------------------------------------------------------------
+  # Job 1b: Build check — catches TypeScript errors before Docker build
+  # Runs in parallel with unit-test; ~30s vs burning a full Docker build
+  # -----------------------------------------------------------------------
+  build-check:
+    name: Build Check (TypeScript)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build SSR bundle
+        run: npm run build:ssr
+
+  # -----------------------------------------------------------------------
   # Job 2: Build → Deploy → Smoke test → Rollback on failure
   # -----------------------------------------------------------------------
   deploy:
     name: Build, Deploy & Smoke Test
-    needs: unit-test
+    needs: [unit-test, build-check]
     runs-on: ubuntu-latest
 
     permissions:
