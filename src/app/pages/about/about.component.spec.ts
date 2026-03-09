@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { AboutComponent } from './about.component';
+import { SeoService } from '../../seo.service';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;
@@ -8,9 +9,12 @@ describe('AboutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AboutComponent ]
-    })
-    .compileComponents();
+      imports: [AboutComponent],
+      providers: [
+        provideRouter([]),
+        { provide: SeoService, useValue: { setStaticTags: vi.fn() } },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AboutComponent);
     component = fixture.componentInstance;
