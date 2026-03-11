@@ -1,5 +1,13 @@
 [
   {
+    "slug": "lessons-from-building-travel-insurance-ai-with-claude",
+    "title": "Lessons from the Trenches: Building a Travel Insurance AI with Claude",
+    "category": "AI & Automation",
+    "summary": "The honest lessons from building an FCA-compliant travel insurance AI with Claude, Cursor, and a healthy respect for read-only tokens.",
+    "imageUrl": "assets/blog-thumbnails/claudebuilds.webp",
+    "publishedAt": "2026-03-10"
+  },
+  {
     "slug": "what-we-have-been-listening-to-in-2026",
     "title": "What we have been listening to in 2026",
     "category": "Digital Transformation",
