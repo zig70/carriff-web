@@ -1,5 +1,13 @@
 [
   {
+    "slug": "the-80-percent-problem-why-we-are-rebuilding-travel-insurance-advice-from-scratch",
+    "title": "The 80% Problem: Why We're Rebuilding Travel Insurance Advice From Scratch",
+    "category": "AI & Automation",
+    "summary": "One in five travel insurance claims is rejected — not for fraud, but because customers never understood what they bought. We're building an AI agent to close that gap.",
+    "imageUrl": "assets/blog-thumbnails/carriffAITravelChat.webp",
+    "publishedAt": "2026-03-20"
+  },
+  {
     "slug": "lessons-from-building-travel-insurance-ai-with-claude",
     "title": "Lessons from the Trenches: Building a Travel Insurance AI with Claude",
     "category": "AI & Automation",
