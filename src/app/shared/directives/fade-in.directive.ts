@@ -15,7 +15,7 @@ export class FadeInDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!isPlatformBrowser(this.platformId) || !('IntersectionObserver' in window)) {
       this.el.nativeElement.classList.add('visible');
       return;
     }
