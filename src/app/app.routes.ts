@@ -33,6 +33,20 @@ export const routes: Routes = [
     path: 'contact',
     loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent),
   },
+  {
+    path: 'intelligent-automation',
+    loadComponent: () =>
+      import('./pages/intelligent-automation/intelligent-automation.component').then(
+        (m) => m.IntelligentAutomationComponent
+      ),
+  },
+  {
+    path: 'travel-insurance-ai',
+    loadComponent: () =>
+      import('./pages/travel-insurance-ai/travel-insurance-ai.component').then(
+        (m) => m.TravelInsuranceAiComponent
+      ),
+  },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: '**',

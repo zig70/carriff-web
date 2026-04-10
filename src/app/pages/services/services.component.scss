@@ -73,6 +73,14 @@
 }
 
 
+.service-block__demo-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var.$color-primary;
+}
+
 .icon-placeholder {
     font-size: 40px;
     color: var.$color-primary; // Your primary brand color

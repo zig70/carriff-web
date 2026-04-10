@@ -15,5 +15,7 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'dataservices', renderMode: RenderMode.Prerender },
   { path: 'about', renderMode: RenderMode.Prerender },
   { path: 'contact', renderMode: RenderMode.Prerender },
+  { path: 'intelligent-automation', renderMode: RenderMode.Prerender },
+  { path: 'travel-insurance-ai', renderMode: RenderMode.Prerender },
   { path: '**', renderMode: RenderMode.Prerender },
 ];

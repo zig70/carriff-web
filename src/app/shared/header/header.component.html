@@ -1,10 +1,10 @@
 <header class="main-header">
   <div class="header-content">
     <a routerLink="/" class="logo-link" aria-label="Carriff Digital Home">
-      <img ngSrc="assets/goat-logo.webp" 
-        width="64" 
-        height="60" 
-        alt="Carriff Digital Logo" 
+      <img ngSrc="assets/goat-logo.webp"
+        width="64"
+        height="60"
+        alt="Carriff Digital Logo"
         class="logo">
       <span class="brand-name">Carriff Digital</span>
     </a>
@@ -17,25 +17,27 @@
             <li><a routerLink="/dataservices">Data Services</a></li>
           </ul>
         </li>
+        <li><a routerLink="/intelligent-automation">AI Automation</a></li>
+        <li><a routerLink="/travel-insurance-ai">Insurance AI</a></li>
         <li><a routerLink="/blog">Blog</a></li>
         <li><a routerLink="/about">About</a></li>
         <li><a routerLink="/contact" class="contact-btn">Contact</a></li>
       </ul>
     </nav>
 
-    <button 
-      class="mobile-menu-toggle" 
-      (click)="toggleMobileMenu()" 
+    <button
+      class="mobile-menu-toggle"
+      (click)="toggleMobileMenu()"
       aria-label="Toggle mobile menu"
       [attr.aria-expanded]="isMobileMenuOpen"
     >
-      &#9776; 
+      &#9776;
     </button>
   </div>
 
-  <nav 
-    class="mobile-dropdown" 
-    [class.open]="isMobileMenuOpen" 
+  <nav
+    class="mobile-dropdown"
+    [class.open]="isMobileMenuOpen"
     aria-label="Mobile Navigation"
     [attr.aria-hidden]="!isMobileMenuOpen"
   >
@@ -44,6 +46,8 @@
       <ul class="mobile-submenu">
           <li><a routerLink="/dataservices" (click)="closeMobileMenu()">Data Services</a></li>
       </ul>
+      <li><a routerLink="/intelligent-automation" (click)="closeMobileMenu()">AI Automation</a></li>
+      <li><a routerLink="/travel-insurance-ai" (click)="closeMobileMenu()">Insurance AI</a></li>
       <li><a routerLink="/blog" (click)="closeMobileMenu()">Blog</a></li>
       <li><a routerLink="/about" (click)="closeMobileMenu()">About</a></li>
       <li><a routerLink="/contact" class="mobile-contact-btn" (click)="closeMobileMenu()">Contact</a></li>

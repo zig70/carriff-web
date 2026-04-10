@@ -77,6 +77,10 @@ All routes are set to `RenderMode.Prerender`. The `articles/:slug` route uses `g
 - Image tag: `europe-west1-docker.pkg.dev/carriffdigital/carriffdigital-web/carriff-angular-web:latest`
 - GCP auth uses Workload Identity Federation (secrets: `WIF_PROVIDER`, `GCP_SERVICE_ACCOUNT`, `GCP_PROJECT_ID`, `GCP_REGION`, `ARTIFACT_REGISTRY_REPO`)
 
+## Content Writing Conventions
+- Avoid em dashes (--) and en dashes in website copy. They read as AI-generated. Use plain sentence structure instead: break into two sentences, use "and", "but", "because", or restructure.
+- Write naturally. If a sentence needs a dash to hold it together, rewrite the sentence.
+
 ## Development Conventions
 - Angular standalone components (no NgModule)
 - Prettier with `printWidth: 100`, single quotes
