@@ -2,99 +2,93 @@
 
 // --- Services Grid Container ---
 .services-grid-container {
-    padding: 40px 20px;
-    background-color: #f8f9fa; // Using a standard light gray background
+    padding: 80px 20px;
+    background-color: #080810;
     text-align: center;
 }
 
 .services-grid-container h2 {
-    margin-bottom: 30px;
-    color: var.$color-text-dark;
+    margin-bottom: 48px;
+    color: var.$color-text-light;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 // --- CSS Grid Setup (Mobile First: 1 Column) ---
 .services-grid {
     display: grid;
-    // Mobile default: 1 column
-    grid-template-columns: 1fr; 
-    gap: 20px; // Space between blocks
+    grid-template-columns: 1fr;
+    gap: 16px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 // --- Tablet Layout (2 Columns) ---
-// Using your var.$breakpoint-tablet (768px)
 @media (min-width: var.$breakpoint-tablet) {
     .services-grid {
-        // Tablet: 2 columns
-        grid-template-columns: repeat(2, 1fr); 
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 // --- Desktop Layout (3 Columns) ---
-// Using your var.$breakpoint-desktop (1024px)
 @media (min-width: var.$breakpoint-desktop) {
     .services-grid {
-        // Desktop: 3 columns (desired layout)
-        grid-template-columns: repeat(3, 1fr); 
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 // --- Individual Service Block Styling ---
 .service-block-link {
-    text-decoration: none; /* Remove default link underline */
-    color: inherit; /* Inherit text color */
+    text-decoration: none;
+    color: inherit;
 }
 
-// 2. Styling for all service blocks (both clickable and non-clickable)
 .service-block,
-.service-block-link .service-block { /* Target the inner block for styling */
-    background-color: var.$color-text-light; // White
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    height: 100%; /* Ensures all blocks are the same height within the grid cell */
+.service-block-link .service-block {
+    background-color: #13131f;
+    padding: 44px 36px;
+    border-radius: 0;
+    text-align: left;
+    transition: background-color 0.25s ease;
+    height: 100%;
 }
 
-// 3. Hover effects for the clickable link
+// Hover effects — subtle background lift only
 .service-block-link:hover .service-block {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    background-color: #1a1a2e;
 }
 
-// 4. Default hover for non-clickable blocks
 .service-block:not(.service-block-link *) {
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
+    cursor: default;
 }
-
 
 .service-block__demo-link {
     display: inline-block;
-    margin-top: 12px;
+    margin-top: 16px;
     font-size: 0.85em;
     font-weight: 600;
     color: var.$color-primary;
+    letter-spacing: 0.01em;
 }
 
 .icon-placeholder {
-    font-size: 40px;
-    color: var.$color-primary; // Your primary brand color
-    margin-bottom: 15px;
+    font-size: 28px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+    display: block;
 }
 
 h3 {
-    color: var.$color-text-dark;
-    font-size: 1.35em;
-    margin-bottom: 10px;
+    color: var.$color-text-light;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
 }
 
 p {
-    color: #6c757d; 
-    font-size: 1em;
-    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.95rem;
+    line-height: 1.65;
 }
