@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { SeoService } from '../../seo.service';
 
 @Component({
@@ -6,6 +7,7 @@ import { SeoService } from '../../seo.service';
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss'],
   standalone: true,
+  imports: [RouterLink],
 })
 export class ServicesComponent {
   constructor(private seoService: SeoService) { }
