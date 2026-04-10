@@ -47,6 +47,7 @@
   margin-bottom: 36px;
   font-weight: 800;
   letter-spacing: -0.04em;
+  color: #ffffff;
 }
 
 .hero-cta-button {
@@ -65,7 +66,7 @@
   transition: background-color 0.25s ease, transform 0.25s ease;
 
   &:hover {
-    background-color: color.adjust(var.$color-primary, $lightness: -8%);
+    background-color: var.$color-primary-hover;
     transform: translateY(-2px);
   }
 }
