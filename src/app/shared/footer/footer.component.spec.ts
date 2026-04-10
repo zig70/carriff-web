@@ -27,14 +27,14 @@ describe('FooterComponent', () => {
 
   it('should render the current year in the copyright notice', () => {
     const el: HTMLElement = fixture.nativeElement;
-    expect(el.querySelector('.footer-copyright')?.textContent).toContain(
+    expect(el.querySelector('.footer-copy')?.textContent).toContain(
       String(new Date().getFullYear())
     );
   });
 
   it('should render the company registration number', () => {
     const el: HTMLElement = fixture.nativeElement;
-    expect(el.querySelector('.footer-copyright')?.textContent).toContain('NI694330');
+    expect(el.querySelector('.footer-copy')?.textContent).toContain('NI694330');
   });
 
   it('should render a contact email link', () => {
