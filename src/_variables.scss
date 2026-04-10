@@ -1,14 +1,12 @@
 @use "sass:color";
 // --- Site Colors ---
-$color-primary-base: #ff00ff;   // Original Bright Magenta/Purple
+$color-primary-base: #7c3aed;   // Deep violet — used sparingly as the single brand accent
 
-// Toned Down Version for solid backgrounds (e.g., Contact button)
-$color-primary-button: color.adjust($color-primary-base, $lightness: -10%); // Darkens by 10% (e.g., to #e600e6)
-$color-primary-accent: color.adjust($color-primary-base, $lightness: 10%); // Lightens by 10%
+// Hover state (slightly darker)
+$color-primary-hover: color.adjust($color-primary-base, $lightness: -8%);
 
 // Re-map the variable used in components
-$color-primary: $color-primary-button; //
-$color-primary:$color-primary-button;   // Magenta/Purple (for Contact button/highlights)
+$color-primary: $color-primary-base;   // Single accent — hero CTA only
 $color-secondary: #D0FBF9; // Light Blue (for mobile menu background)
 $color-text-dark: #000;
 $color-text-light: #fff;
