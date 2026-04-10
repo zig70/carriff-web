@@ -46,17 +46,19 @@
 
 .service-block,
 .service-block-link .service-block {
-    background-color: #13131f;
+    background-color: #1a1a2e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 44px 36px;
     border-radius: 0;
     text-align: left;
-    transition: background-color 0.25s ease;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
     height: 100%;
 }
 
 // Hover effects — subtle background lift only
 .service-block-link:hover .service-block {
-    background-color: #1a1a2e;
+    background-color: #1f1f3a;
+    border-color: rgba(255, 255, 255, 0.14);
 }
 
 .service-block:not(.service-block-link *) {
