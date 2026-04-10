@@ -22,9 +22,10 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    135deg,
-    rgba(8, 8, 16, 0.88) 0%,
-    rgba(8, 8, 16, 0.55) 100%
+    to right,
+    rgba(8, 8, 16, 0.78) 0%,
+    rgba(8, 8, 16, 0.78) 40%,
+    rgba(8, 8, 16, 0.35) 100%
   );
   z-index: 0;
 }
